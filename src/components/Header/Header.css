@@ -1,0 +1,8 @@
+#header {
+  grid-column: 2/4;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr repeat(2, minmax(auto, 35em)) 1fr;
+}
