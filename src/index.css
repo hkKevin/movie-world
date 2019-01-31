@@ -6,10 +6,10 @@ body {
   background-color: #080e24;
   color: #eee;
   font-size: 1.1em;
+  
+  font-family: 'Work Sans', sans-serif;
+  
 
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

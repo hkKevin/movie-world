@@ -1,8 +1,9 @@
 #header {
   grid-column: 2/4;
+  font-family: 'Michroma', sans-serif;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr repeat(2, minmax(auto, 35em)) 1fr;
+  grid-template-columns: 1fr repeat(2, minmax(auto, 30em)) 1fr;
 }

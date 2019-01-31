@@ -1,7 +1,8 @@
 // Action Reducer:
 
 const initialState = {
-  movies: []
+  movies: [],
+  hasResult: true
 }
 
 const movies = (state = initialState, action) => {
@@ -11,7 +12,8 @@ const movies = (state = initialState, action) => {
     case 'SEARCH_MOVIES_SUCCESS':
       return {
         ...state,
-        movies: action.movies
+        movies: action.movies,
+        hasResult: action.hasResult
       };
 
     default:

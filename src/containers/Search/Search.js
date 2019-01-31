@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import * as actions from '../../store/action/index';
+import './Search.css';
 
 class Search extends Component {
 
@@ -15,7 +16,9 @@ class Search extends Component {
 
     return (
       <section className='grid'>
-        <input type='text' onChange={this.onInputChange} />
+        <div id='search-input'>
+          <input type='text' onChange={this.onInputChange} />
+        </div>
       </section>
     );
   }
@@ -23,7 +26,7 @@ class Search extends Component {
 
 const mapStateToProps = state => {
   return {
-    
+
   };
 }
 

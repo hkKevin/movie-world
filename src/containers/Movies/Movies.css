@@ -1,0 +1,10 @@
+#movies-container-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1em;
+  grid-column: 2/4;
+}
+
+#has-result-or-not {
+  grid-column: 2/4;
+}
