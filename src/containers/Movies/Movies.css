@@ -8,3 +8,13 @@
 #has-result-or-not {
   grid-column: 2/4;
 }
+
+@media (max-width: 700px) {
+  #movies-container-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1em;
+    grid-column: 2/4;
+  }
+  
+}

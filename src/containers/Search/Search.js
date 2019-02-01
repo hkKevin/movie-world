@@ -17,7 +17,7 @@ class Search extends Component {
     return (
       <section className='grid'>
         <div id='search-input'>
-          <input type='text' onChange={this.onInputChange} />
+          <input type='text' onChange={this.onInputChange} placeholder='Search...'/>
         </div>
       </section>
     );
