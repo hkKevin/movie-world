@@ -15,12 +15,11 @@ export const searchMovies = (searchText) => {
         fetchedMovies.push( response.data.results[key] )
       }
       if (fetchedMovies.length === 0) {
-        dispatch(searchMoviesSuccess(fetchedMovies, hasResult));
+        dispatch(searchMoviesSuccess(fetchedMovies, hasResult, searchText));
       } else {
         hasResult = true;
         dispatch(searchMoviesSuccess(fetchedMovies, hasResult));
       }
-      // dispatch(searchMoviesSuccess(fetchedMovies));
       console.log(fetchedMovies);
     })
     .catch(error => {
@@ -29,10 +28,32 @@ export const searchMovies = (searchText) => {
   };
 };
 
-export const searchMoviesSuccess = (fetchedMovies, hasResult) => {
+export const searchMoviesSuccess = (fetchedMovies, hasResult, searchText) => {
   return {
     type: 'SEARCH_MOVIES_SUCCESS',
     movies: fetchedMovies,
-    hasResult: hasResult
+    hasResult: hasResult,
+    searchText: searchText
   };
 }
+
+export const selectMovie = (movieId) => {
+  return dispatch => {
+    if (movieId === null || movieId === '') { return; }   // Return when movieId not found
+    axios.get('https://api.themoviedb.org/3/movie/' + movieId + '?api_key=34af8294dab051e0d2dc34894beac01c&language=en-US')
+      .then(response => {
+        console.log(response.data);
+        dispatch(selectMovieSuccess(response.data))
+      })
+      .catch(error => {
+        console.error(error);
+      })
+  };
+};
+
+export const selectMovieSuccess = (movieDetails) => {
+  return {
+    type: 'SELECT_MOVIE_SUCCESS',
+    movieDetails: movieDetails
+  };
+};

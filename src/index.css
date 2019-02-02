@@ -3,8 +3,10 @@ body {
   padding: 0;
 
   text-align: center;
-  background-color: #080e24;
-  color: #eee;
+  /* background-color: #080e24; */
+  /* background-color: #0f1a44; */
+  background-color: #0b1434;
+  color: #f5f5f5;
   font-size: 1.1em;
   
   font-family: 'Work Sans', sans-serif;

@@ -1,20 +1,27 @@
 import React, { Component } from 'react';
+import { Route, Redirect, Switch, withRouter } from 'react-router-dom';
 
 import './App.css';
-import Header from './components/Header/Header';
-import Search from './containers/Search/Search';
-import Movies from './containers/Movies/Movies';
+import Results from './containers/Movies/Results';
+import Movie from './components/Movie/Movie';
 
 class App extends Component {
   render() {
+
+    let routes = (
+      <Switch>
+        <Route path='/movie' component={Movie} />
+        <Route path='/' exact component={Results} />        
+        <Redirect to='/' />
+      </Switch>
+    );
+
     return (
       <div className="App">
-        <Header />
-        <Search />
-        <Movies />
+        {routes}
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

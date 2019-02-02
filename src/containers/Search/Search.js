@@ -7,8 +7,7 @@ import './Search.css';
 class Search extends Component {
 
   onInputChange = (event) => {
-    // dispatch to redux action creator/reducer with value
-    this.props.onSearchMovies(event.target.value);
+    this.props.onSearchMovies(event.target.value);  // dispatch to redux action creator with userInput
     console.log(event.target.value);
   }
 

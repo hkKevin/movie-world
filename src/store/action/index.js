@@ -1,3 +1,4 @@
 export {
-  searchMovies
+  searchMovies,
+  selectMovie
 } from './movies';
