@@ -1,0 +1,19 @@
+#movieTitle {
+  font-size: 2em;
+}
+
+#year {
+  color: gray;
+}
+
+.carousel:hover  {
+  cursor: grab;
+}
+
+.carousel:active  {
+  cursor: grabbing;
+}
+
+#movieDetails {
+  grid-column: 2/4;
+}

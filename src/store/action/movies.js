@@ -40,7 +40,9 @@ export const searchMoviesSuccess = (fetchedMovies, hasResult, searchText) => {
 export const selectMovie = (movieId) => {
   return dispatch => {
     if (movieId === null || movieId === '') { return; }   // Return when movieId not found
-    axios.get('https://api.themoviedb.org/3/movie/' + movieId + '?api_key=34af8294dab051e0d2dc34894beac01c&language=en-US')
+
+    axios.get('https://api.themoviedb.org/3/movie/' + movieId + '?api_key=34af8294dab051e0d2dc34894beac01c&language=en-US&append_to_response=images&include_image_language=en,null')
+    // axios.get('https://api.themoviedb.org/3/movie/' + movieId + '?api_key=34af8294dab051e0d2dc34894beac01c&language=en-US')
       .then(response => {
         console.log(response.data);
         dispatch(selectMovieSuccess(response.data))
