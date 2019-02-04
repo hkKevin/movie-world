@@ -5,7 +5,9 @@ const initialState = {
   hasResult: true,
   searchText: "",
   movieDetails: null,
-  movieId: null
+  movieId: null,
+  credits: null,
+  reviews: null
 }
 
 const movies = (state = initialState, action) => {
@@ -30,6 +32,18 @@ const movies = (state = initialState, action) => {
       return {
         ...state,
         movieId: action.movieId
+      }
+      
+    case 'GET_CREDITS_SUCCESS':
+      return {
+        ...state,
+        credits: action.credits
+      }
+
+    case 'GET_REVIEWS_SUCCESS':
+      return {
+        ...state,
+        reviews: action.reviews
       }
 
     default:

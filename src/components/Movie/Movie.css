@@ -5,8 +5,7 @@
 
 #movieIntro {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  /* gap: 1em; */
+  grid-template-columns: repeat(2, 1fr);
 }
 
 #left {
@@ -14,14 +13,38 @@
 }
 
 #movieTitle {
-  font-size: 2em;
-  line-height: 1.8em;
-  text-align: center;
+  font-size: 4vh;
+  line-height: 6vh;
   margin-top: 0;  
+  margin-bottom: 1vh;
 }
 
-#year {
+#yearRuntimeRating {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   color: gray;
+}
+
+#yearRuntimeRating i {
+  margin-right: 1vh;
+}
+
+#denominator {
+  font-size: 1.5vh;
+}
+
+#castContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 5vh 0;
+}
+
+.castProfilePic > img {
+  width: 100px;
+}
+
+.carousel {
+  margin-bottom: 7vh;
 }
 
 .carousel:hover  {
@@ -30,4 +53,31 @@
 
 .carousel:active  {
   cursor: grabbing;
+}
+
+#reviewText {
+  font-size: 2vh;
+  text-align: left;
+  margin-bottom: 2vh;
+}
+
+.collapsible {
+  border: none;
+}
+
+.collapsible-header {
+  color: darkblue;
+  text-align: left;
+  border: none;
+}
+
+.collapsible-body {
+  text-align: left;
+  border: none;
+  padding: 0 30vh;
+  white-space: pre-wrap;
+}
+
+.collapsible-header:hover {
+  background: #eee;
 }
