@@ -3,7 +3,7 @@
 }
 
 #search-input input {
-  margin: 5vh 0;
+  margin-bottom: 5vh;
   width: 50%;
   /* text-align: center; */
   padding: .2em 1em;

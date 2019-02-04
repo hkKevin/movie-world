@@ -4,7 +4,8 @@ const initialState = {
   movies: [],
   hasResult: true,
   searchText: "",
-  movieDetails: null
+  movieDetails: null,
+  movieId: null
 }
 
 const movies = (state = initialState, action) => {
@@ -23,6 +24,12 @@ const movies = (state = initialState, action) => {
       return {
         ...state,
         movieDetails: action.movieDetails
+      }
+
+    case 'SET_MOVIE_ID':
+      return {
+        ...state,
+        movieId: action.movieId
       }
 
     default:

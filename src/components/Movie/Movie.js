@@ -10,45 +10,49 @@ class Movie extends Component {
     const backdropSrc = 'https://image.tmdb.org/t/p/w780';
     const posterSrc = 'https://image.tmdb.org/t/p/w342';
 
-    // document.addEventListener('DOMContentLoaded', function() {
-    //   var elems = document.querySelectorAll('.carousel');
-    //   var instances = M.Carousel.init(elems, options);
-    // });
-
     let movieInfo = null;
-    if (this.props.info) {
+    if (this.props.info) {  // If movie details found...
+      if (this.props.info.id === this.props.movieId) {  // If new movie details loaded...
+        const runtimeHour = Math.floor(this.props.info.runtime / 60);
+        const runtimeMin = this.props.info.runtime % 60;
 
-      const runtimeHour = Math.floor(this.props.info.runtime / 60);
-      const runtimeMin = this.props.info.runtime % 60;
+        movieInfo = (
+          <div className='grid'>
+            <div id='movieDetails'>
+              <div id='movieIntro'>
+                <div id='left'>
+                  <p id='movieTitle'>{this.props.info.title} <span id='year'>({this.props.info.release_date.substring(0, 4)})</span></p>
+                  {/* <p>Movie ID: {this.props.info.id}</p> */}
+                  <p>{this.props.info.overview}</p>
+                  <p>Budget: {this.props.info.budget}</p>
+                  <p>Revenue: {this.props.info.revenue}</p>
+                  <p>Runtime: {runtimeHour}h {runtimeMin}m</p>
+                  <p>Vote Avg.: {this.props.info.vote_average}</p>
+                  <p>Vote Count: {this.props.info.vote_count}</p>
+                </div>
 
-      movieInfo = (
-        <div className='grid'>
-          <div id='movieDetails'>
+                <div id='right'>
+                  {this.props.info.poster_path
+                    ? <img src={posterSrc + this.props.info.poster_path} title={this.props.info.title} alt={'Poster of "' + this.props.info.title + '"'} />
+                    : <p>Poster of "{this.props.info.title}" not found</p>}
+                </div>
 
-            <p id='movieTitle'>{this.props.info.title} <span id='year'>({this.props.info.release_date.substring(0, 4)})</span></p>
-            {/* <p>Movie ID: {this.props.info.id}</p> */}
-            {this.props.info.poster_path
-              ? <img src={posterSrc + this.props.info.poster_path} title={this.props.info.title} alt={'Poster of "' + this.props.info.title + '"'} />
-              : <p>Poster of "{this.props.info.title}" not found</p>}
-            <p>{this.props.info.overview}</p>
-            <p>Revenue: {this.props.info.revenue}</p>
-            <p>Runtime: {runtimeHour}h {runtimeMin}m</p>
-            <p>Vote Avg.: {this.props.info.vote_average}</p>
-            <p>Vote Count: {this.props.info.vote_count}</p>
-
-            <Carousel
-              options={{ 
-                fullWidth: true,
-                indicators: true,
-                duration: 300,
-                noWrap: true
-              }}
-              images={this.props.info.images.backdrops.map(backdrop => {
-                return backdropSrc + backdrop.file_path;
-              })} />
+              </div>
 
 
-            {/* {this.props.info.images.backdrops.map(backdrop => {
+              <Carousel
+                options={{
+                  fullWidth: true,
+                  indicators: true,
+                  duration: 300,
+                  noWrap: true
+                }}
+                images={this.props.info.images.backdrops.map(backdrop => {
+                  return backdropSrc + backdrop.file_path;
+                })} />
+
+
+              {/* {this.props.info.images.backdrops.map(backdrop => {
             return (
               <div key={backdrop.file_path}>
                 <a
@@ -61,9 +65,15 @@ class Movie extends Component {
 
             );
           })} */}
+
+            </div>
           </div>
-        </div>
-      );
+        );
+      } else {
+        movieInfo = 'LOADING...';
+      }
+
+
     } else {
       movieInfo = 'Movie Details not found.';
     }
@@ -82,7 +92,8 @@ class Movie extends Component {
 
 export const mapStateToProps = state => {
   return {
-    info: state.movieDetails
+    info: state.movieDetails,
+    movieId: state.movieId
   };
 };
 
