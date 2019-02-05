@@ -7,7 +7,8 @@ const initialState = {
   movieDetails: null,
   movieId: null,
   credits: null,
-  reviews: null
+  reviews: null,
+  videos: null
 }
 
 const movies = (state = initialState, action) => {
@@ -38,6 +39,12 @@ const movies = (state = initialState, action) => {
       return {
         ...state,
         credits: action.credits
+      }
+
+    case 'GET_VIDEOS_SUCCESS':
+      return {
+        ...state,
+        videos: action.videos
       }
 
     case 'GET_REVIEWS_SUCCESS':

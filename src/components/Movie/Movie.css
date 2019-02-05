@@ -43,6 +43,22 @@
   width: 100px;
 }
 
+#videoContainer {
+  margin-bottom: 8vh;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1em;
+}
+
+@media (max-width: 1150px) {
+  #videoContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    grid-column: 2/4;
+  }
+}
+
 .carousel {
   margin-bottom: 7vh;
 }

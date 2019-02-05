@@ -62,7 +62,17 @@ export const selectMovie = (movieId) => {
       try {
         const credits = await axios.get('https://api.themoviedb.org/3/movie/' + movieId + '/credits?api_key=34af8294dab051e0d2dc34894beac01c');
         dispatch(getCreditsSuccess(credits.data));
-        // console.log(response.data);
+        console.log(credits.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    async function getVideos() {
+      try {
+        const videos = await axios.get('https://api.themoviedb.org/3/movie/' + movieId + '/videos?api_key=34af8294dab051e0d2dc34894beac01c&language=en-US');
+        dispatch(getVideosSuccess(videos.data));
+        // console.log(videos.data);
       } catch (error) {
         console.error(error);
       }
@@ -72,7 +82,7 @@ export const selectMovie = (movieId) => {
       try {
         const reviews = await axios.get('https://api.themoviedb.org/3/movie/'+ movieId +'/reviews?api_key=34af8294dab051e0d2dc34894beac01c&language=en-US&page=1');
         dispatch(getReviewsSuccess(reviews.data));
-        console.log(reviews.data);
+        // console.log(reviews.data);
       } catch (error) {
         console.error(error);
       }
@@ -81,6 +91,7 @@ export const selectMovie = (movieId) => {
     // Triggering async. HTTP Requests
     getMovieDetails();
     getMovieCredits();
+    getVideos();
     getMovieReviews();
 
     // The normal approach for HTTP Request
@@ -108,6 +119,15 @@ export const getCreditsSuccess = (credits) => {
     credits: credits
   };
 };
+
+export const getVideosSuccess = (videos) => {
+  return {
+    type: 'GET_VIDEOS_SUCCESS',
+    videos: videos
+  };
+};
+
+
 
 export const getReviewsSuccess = (reviews) => {
   return {

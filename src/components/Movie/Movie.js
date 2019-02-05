@@ -34,20 +34,40 @@ class Movie extends Component {
           );
         }
 
+        let videos = null;
+        if (this.props.videos) {
+          videos = (
+            this.props.videos.results.map(video => {
+              return (
+                <iframe
+                  key={video.id}
+                  title='video'
+                  // width="560" height="315"
+                  width="544" height="306"
+                  src={'https://www.youtube-nocookie.com/embed/' + video.key}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen>
+                </iframe>
+              );
+            })
+          );
+        }
+
         let reviewText = null;
         let reviews = null;
         if (this.props.reviews) {
           if (this.props.reviews.results.length !== 0) {
             reviewText = <div id='reviewText'>Reviews:</div>
-          } 
-          
+          }
+
           reviews = (
             this.props.reviews.results.map(review => {
               return (
                 review.content
                   ? (
                     <CollapsibleItem key={review.id} header={'From ' + review.author + ':'}>
-                        <p>{review.content}</p>
+                      <p>{review.content}</p>
                     </CollapsibleItem>
                   )
                   : null
@@ -94,6 +114,10 @@ class Movie extends Component {
                     : <p>Poster of "{this.props.info.title}" not found</p>}
                 </div>
 
+              </div>
+
+              <div id='videoContainer'>
+                {videos}
               </div>
 
 
@@ -144,7 +168,8 @@ export const mapStateToProps = state => {
     info: state.movieDetails,
     movieId: state.movieId,
     credits: state.credits,
-    reviews: state.reviews
+    reviews: state.reviews,
+    videos: state.videos
   };
 };
 
