@@ -1,6 +1,7 @@
 
-#movieDetails {
+#movieInfo {
   grid-column: 2/4;
+  margin: 0 2vh;
 }
 
 #movieIntro {
@@ -17,12 +18,14 @@
   line-height: 6vh;
   margin-top: 0;  
   margin-bottom: 1vh;
+  text-align: left;
 }
 
 #yearRuntimeRating {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   color: gray;
+  margin-top: 1.5vh;
 }
 
 #yearRuntimeRating i {
@@ -30,13 +33,37 @@
 }
 
 #denominator {
-  font-size: 1.5vh;
+  font-size: 1.7vh;
+}
+
+#movieDetails {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+#left {
+  padding: 2vh 0;
+}
+
+#right {
+  text-align: left;
+}
+
+#budgetRevenueContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column: 2/4;
+  color: gray;
+}
+
+#budgetRevenueContainer p {
+  margin-top: 0;
 }
 
 #castContainer {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  margin: 5vh 0;
+  margin: 3vh 0;
 }
 
 .castProfilePic > img {
@@ -50,16 +77,9 @@
   gap: 1em;
 }
 
-@media (max-width: 1150px) {
-  #videoContainer {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0;
-    grid-column: 2/4;
-  }
-}
-
 .carousel {
+  width: 100%;
+  margin: auto;
   margin-bottom: 7vh;
 }
 
@@ -72,7 +92,7 @@
 }
 
 #reviewText {
-  font-size: 2vh;
+  /* font-size: 2vh; */
   text-align: left;
   margin-bottom: 2vh;
 }
@@ -96,4 +116,111 @@
 
 .collapsible-header:hover {
   background: #eee;
+}
+
+@media (max-width: 1150px) {
+  #videoContainer iframe {
+    margin: 1vh auto;
+    width: 480px;
+    height: 270px;
+  }
+}
+
+@media (max-width: 1030px) {
+  #videoContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+@media (max-width: 950px) {
+  .collapsible-body {
+    padding: 0 20vh;
+  }  
+}
+
+@media (max-width: 900px) {
+  #movieIntro {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  #movieTitle {
+    text-align: center;
+  }
+
+  #movieDetails {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  #left {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: auto;
+    /* grid-column: 2/4; */
+  }
+}
+
+@media (max-width: 700px) {
+  .collapsible-body {
+    padding: 0 15vh;
+  }  
+}
+
+@media (max-width: 620px) {
+  .collapsible-body {
+    padding: 0 10vh;
+  }  
+}
+
+@media (max-width: 560px) {
+
+  body {
+    font-size: 2.5vh;
+  }
+
+  #videoContainer iframe {
+    margin: 1vh auto;
+    width: 272px;
+    height: 153px;
+  }
+  
+  .castProfilePic > img {
+    width: 70px;
+  }
+
+  #budgetRevenueContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .carousel {
+    width: 95%;
+  }  
+
+  .collapsible {
+    margin: 0 1vh;
+  }
+
+  .collapsible-body {
+    padding: 0;
+  }
+}
+
+@media (max-width: 400px) {
+
+  body {
+    font-size: 3vh;
+  }
+
+  .castProfilePic > img {
+    width: 50px;
+  }
+
+  #left img {
+    width: 70%;
+    margin: auto;
+  }
 }
