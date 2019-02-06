@@ -1,13 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Carousel, Collapsible, CollapsibleItem } from 'react-materialize';
+import { Collapsible, CollapsibleItem } from 'react-materialize';
+// import { Carousel } from "react-responsive-carousel";
 
+// import "react-responsive-carousel/lib/styles/carousel.min.css";
 import './Movie.css';
 import Header from '../Header/Header';
+// import Slideshow from 'react-slidez';
 
 class Movie extends Component {
 
   render() {
+
+    let prevScrollPosition = window.pageYOffset;
+    window.onscroll = () => {
+      let currentScrollPosition = window.pageYOffset;
+      if (document.getElementById('toTop')) {
+        if (prevScrollPosition > currentScrollPosition) {
+          // show
+          console.log('show');
+          document.getElementById('toTop').style.bottom = '20px';
+        } else if (prevScrollPosition < currentScrollPosition) {
+          // hide
+          document.getElementById('toTop').style.bottom = '-100px';
+        }
+        prevScrollPosition = currentScrollPosition;
+      }
+
+    }
+
 
     const backdropSrc = 'https://image.tmdb.org/t/p/w780';
     const posterSrc = 'https://image.tmdb.org/t/p/w342';
@@ -67,6 +88,29 @@ class Movie extends Component {
           );
         }
 
+        let backdrops = null;
+        if (this.props.info) {
+          backdrops = (
+            this.props.info.images.backdrops.map(backdrop => {
+              return (
+                <img key={backdrop.file_path} src={backdropSrc + backdrop.file_path} alt={'Backdrop of ' + this.props.info.title} />
+              );
+              // return backdropSrc + backdrop.file_path;
+            })
+          );
+        }
+
+        let bdArr = [];
+        if (this.props.info) {
+          this.props.info.images.backdrops.map(backdrop => {
+            return (
+              bdArr.push(backdropSrc + backdrop.file_path)
+            );
+          })
+        }
+
+
+
         let reviewText = null;
         let reviews = null;
         if (this.props.reviews) {
@@ -105,7 +149,6 @@ class Movie extends Component {
                     <i className="far fa-star fa-xs"></i>
                     {this.props.info.vote_average}
                     <span id='denominator'> / 10</span>
-                    {/* <span id='voteCount'> ({this.props.info.vote_count})</span> */}
                   </div>
                 </div>
               </div>
@@ -118,7 +161,6 @@ class Movie extends Component {
                 </div>
 
                 <div id='right'>
-                  {/* <p>Movie ID: {this.props.info.id}</p> */}
                   <p>{this.props.info.overview}</p>
 
                   <div id='budgetRevenueContainer'>
@@ -133,7 +175,7 @@ class Movie extends Component {
                   <div id='castContainer'>
                     {cast}
                   </div>
-                  
+
                 </div>
               </div>
 
@@ -141,16 +183,18 @@ class Movie extends Component {
                 {videos}
               </div>
 
-              <Carousel
-                options={{
-                  fullWidth: true,
-                  indicators: true,
-                  duration: 300,
-                  noWrap: true
-                }}
-                images={this.props.info.images.backdrops.map(backdrop => {
-                  return backdropSrc + backdrop.file_path;
-                })} />
+
+
+
+              {/* <div id='bdContainer'>
+              <div id='backdrop'>
+                <Carousel>
+                  {backdrops}
+                </Carousel>
+              </div>
+            </div> */}
+
+
 
               <div>
                 {reviewText}
@@ -164,17 +208,25 @@ class Movie extends Component {
 
         );
       } else {
-        movieInfo = 'LOADING...';
+        movieInfo = (
+          <div className="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        );
       }
 
     } else {
-      movieInfo = 'Movie Details not found.';
+      movieInfo = (
+        <div className="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      );
+      // movieInfo = 'Movie Details not found.';
     }
 
 
     return (
       <div>
         <Header />
+        <a href='#top'>
+          <i id='toTop' style={{ right: '20px', bottom: '-100px' }} className="far fa-arrow-alt-circle-up fa-2x"></i>
+        </a>
         {movieInfo}
       </div>
     );

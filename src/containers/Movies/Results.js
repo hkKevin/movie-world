@@ -36,8 +36,8 @@ class Movies extends Component {
         <section className='grid'>
           <div id='movies-container-grid'>
             {this.props.fetchedMovies.map(movie => (
-              <div key={movie.id} onClick={() => { this.movieClicked(movie.id) }}>
-                <div className='movie'>
+              <div key={movie.id}>
+                <div className='movie' onClick={() => { this.movieClicked(movie.id) }}>
                   { movie.poster_path 
                     ? <img src={imgSrc + movie.poster_path} title={movie.title} alt={'Poster of "' + movie.title + '"'} /> 
                     : <p>Poster of "{movie.title}" not found</p>}
