@@ -1,3 +1,7 @@
+.carousel .slide img {
+  max-width: 100%;
+  height: auto;
+}
 
 #movieInfo {
   grid-column: 2/4;
@@ -181,31 +185,38 @@
   margin-bottom: 2vh;
 }
 
-.collapsible {
-  border: none;
+.accordion {
+  margin-bottom: 4em;
 }
 
-.collapsible-header {
+.accordion__title {
   color: darkblue;
-  text-align: left;
-  border: none;
+  outline: none;
+  padding: .2em 1em;
+  width: auto;
 }
 
-.collapsible-body {
+.accordion__title p {
+  margin-top: 0;
+}
+
+.accordion__title:hover {
+  background: #ddd;
+}
+
+.accordion__body {
   text-align: left;
   border: none;
   padding: 0 30vh;
   white-space: pre-wrap;
+  margin-bottom: 3em;
 }
 
-.collapsible-header:hover {
-  background: #eee;
-}
+
 
 .far.fa-arrow-alt-circle-up {
   position: fixed;
-  /* right: 20px;
-  bottom: 20px; */
+  z-index: 99;
   color: #555;
 }
 
@@ -309,16 +320,23 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 @media (max-width: 1150px) {
   #videoContainer iframe {
     margin: 1vh auto;
     width: 480px;
     height: 270px;
   }
-
-  /* #right {
-    width: 30%;
-  } */
 }
 
 @media (max-width: 1030px) {
@@ -330,7 +348,7 @@
 }
 
 @media (max-width: 950px) {
-  .collapsible-body {
+  .accordion__body {
     padding: 0 20vh;
   }  
 }
@@ -354,24 +372,22 @@
     display: grid;
     grid-template-columns: 1fr;
     margin: auto;
-    /* grid-column: 2/4; */
   }
 }
 
 @media (max-width: 700px) {
-  .collapsible-body {
+  .accordion__body {
     padding: 0 15vh;
   }  
 }
 
 @media (max-width: 620px) {
-  .collapsible-body {
+  .accordion__body {
     padding: 0 10vh;
   }  
 }
 
 @media (max-width: 560px) {
-
   body {
     font-size: 2.5vh;
   }
@@ -391,15 +407,7 @@
     grid-template-columns: 1fr;
   }
 
-  .carousel {
-    width: 95%;
-  }  
-
-  .collapsible {
-    margin: 0 1vh;
-  }
-
-  .collapsible-body {
+  .accordion__body {
     padding: 0;
   }
 }
@@ -422,4 +430,5 @@
     width: 70%;
     margin: auto;
   }
+
 }

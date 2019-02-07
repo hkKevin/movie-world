@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Collapsible, CollapsibleItem } from 'react-materialize';
-// import { Carousel } from "react-responsive-carousel";
+import { Carousel } from "react-responsive-carousel";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemTitle,
+  AccordionItemBody,
+} from 'react-accessible-accordion';
 
-// import "react-responsive-carousel/lib/styles/carousel.min.css";
+import 'react-accessible-accordion/dist/fancy-example.css';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import './Movie.css';
 import Header from '../Header/Header';
-// import Slideshow from 'react-slidez';
 
 class Movie extends Component {
 
@@ -18,7 +23,7 @@ class Movie extends Component {
       if (document.getElementById('toTop')) {
         if (prevScrollPosition > currentScrollPosition) {
           // show
-          console.log('show');
+          // console.log('show');
           document.getElementById('toTop').style.bottom = '20px';
         } else if (prevScrollPosition < currentScrollPosition) {
           // hide
@@ -29,8 +34,7 @@ class Movie extends Component {
 
     }
 
-
-    const backdropSrc = 'https://image.tmdb.org/t/p/w780';
+    const backdropSrc = 'https://image.tmdb.org/t/p/w1280';
     const posterSrc = 'https://image.tmdb.org/t/p/w342';
     const profileSrc = 'https://image.tmdb.org/t/p/w185'
 
@@ -76,7 +80,6 @@ class Movie extends Component {
                 <iframe
                   key={video.id}
                   title='video'
-                  // width="560" height="315"
                   width="544" height="306"
                   src={'https://www.youtube-nocookie.com/embed/' + video.key}
                   frameBorder="0"
@@ -94,22 +97,11 @@ class Movie extends Component {
             this.props.info.images.backdrops.map(backdrop => {
               return (
                 <img key={backdrop.file_path} src={backdropSrc + backdrop.file_path} alt={'Backdrop of ' + this.props.info.title} />
+                // <img src={backdropSrc + backdrop.file_path} />
               );
-              // return backdropSrc + backdrop.file_path;
             })
           );
         }
-
-        let bdArr = [];
-        if (this.props.info) {
-          this.props.info.images.backdrops.map(backdrop => {
-            return (
-              bdArr.push(backdropSrc + backdrop.file_path)
-            );
-          })
-        }
-
-
 
         let reviewText = null;
         let reviews = null;
@@ -123,9 +115,14 @@ class Movie extends Component {
               return (
                 review.content
                   ? (
-                    <CollapsibleItem key={review.id} header={'From ' + review.author + ':'}>
-                      <p>{review.content}</p>
-                    </CollapsibleItem>
+                    <AccordionItem key={review.id}>
+                      <AccordionItemTitle>
+                        <p>{'From ' + review.author + ':'}</p>
+                      </AccordionItemTitle>
+                      <AccordionItemBody>
+                        <p>{review.content}</p>
+                      </AccordionItemBody>
+                    </AccordionItem>
                   )
                   : null
               );
@@ -134,78 +131,84 @@ class Movie extends Component {
         }
 
         movieInfo = (
-          <div className='grid'>
-            <div id='movieInfo'>
-              <div id='movieIntro'>
-                <div id='movieTitle'>
-                  {this.props.info.title}
-                </div>
-                <div id='yearRuntimeRating'>
-                  <span id='year'>{this.props.info.release_date.substring(0, 4)}</span>
-                  <div>
-                    {runtimeHour}h {runtimeMin}m
+          <div>
+            <div className='grid'>
+              <div id='movieInfo'>
+                <div id='movieIntro'>
+                  <div id='movieTitle'>
+                    {this.props.info.title}
+                  </div>
+                  <div id='yearRuntimeRating'>
+                    <span id='year'>{this.props.info.release_date.substring(0, 4)}</span>
+                    <div>
+                      {runtimeHour}h {runtimeMin}m
                     </div>
-                  <div>
-                    <i className="far fa-star fa-xs"></i>
-                    {this.props.info.vote_average}
-                    <span id='denominator'> / 10</span>
+                    <div>
+                      <i className="far fa-star fa-xs"></i>
+                      {this.props.info.vote_average}
+                      <span id='denominator'> / 10</span>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div id='movieDetails'>
-                <div id='left'>
-                  {this.props.info.poster_path
-                    ? <img src={posterSrc + this.props.info.poster_path} title={this.props.info.title} alt={'Poster of "' + this.props.info.title + '"'} />
-                    : <p>Poster of "{this.props.info.title}" not found</p>}
+                <div id='movieDetails'>
+                  <div id='left'>
+                    {this.props.info.poster_path
+                      ? <img src={posterSrc + this.props.info.poster_path} title={this.props.info.title} alt={'Poster of "' + this.props.info.title + '"'} />
+                      : <p>Poster of "{this.props.info.title}" not found</p>}
+                  </div>
+
+                  <div id='right'>
+                    <p>{this.props.info.overview}</p>
+
+                    <div id='budgetRevenueContainer'>
+                      <p>Budget: $ {this.props.info.budget.toLocaleString()}</p>
+                      <p>Revenue: $ {this.props.info.revenue.toLocaleString()}</p>
+                    </div>
+
+                    <div id='directorContainer'>
+                      {'Directed by ' + director}
+                    </div>
+
+                    <div id='castContainer'>
+                      {cast}
+                    </div>
+
+                  </div>
                 </div>
 
-                <div id='right'>
-                  <p>{this.props.info.overview}</p>
-
-                  <div id='budgetRevenueContainer'>
-                    <p>Budget: $ {this.props.info.budget.toLocaleString()}</p>
-                    <p>Revenue: $ {this.props.info.revenue.toLocaleString()}</p>
-                  </div>
-
-                  <div id='directorContainer'>
-                    {'Directed by ' + director}
-                  </div>
-
-                  <div id='castContainer'>
-                    {cast}
-                  </div>
-
+                <div id='videoContainer'>
+                  {videos}
                 </div>
+
               </div>
-
-              <div id='videoContainer'>
-                {videos}
-              </div>
-
-
-
-
-              {/* <div id='bdContainer'>
-              <div id='backdrop'>
-                <Carousel>
-                  {backdrops}
-                </Carousel>
-              </div>
-            </div> */}
-
-
-
-              <div>
-                {reviewText}
-                <Collapsible defaultActiveKey={0}>
-                  {reviews}
-                </Collapsible>
-              </div>
-
             </div>
-          </div>
 
+
+            <Carousel
+              showIndicators={false}
+              useKeyboardArrows={true}
+              infiniteLoop={true}
+              autoPlay={true}
+              interval={5000}>
+              {backdrops}
+            </Carousel>
+
+
+            <div className='grid'>
+              <div id='movieInfo'>
+
+                <div>
+                  {reviewText}
+                  <Accordion accordion={false}>
+                    {reviews}
+                  </Accordion>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
         );
       } else {
         movieInfo = (
@@ -217,7 +220,6 @@ class Movie extends Component {
       movieInfo = (
         <div className="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
       );
-      // movieInfo = 'Movie Details not found.';
     }
 
 
