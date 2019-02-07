@@ -7,6 +7,8 @@ import '../../components/Header/Header.css'
 import Search from '../../containers/Search/Search';
 import '../../containers/Search/Search.css';
 import * as actions from '../../store/action/index';
+import Footer from '../../components/Footer/Footer';
+
 
 class Movies extends Component {
 
@@ -19,6 +21,7 @@ class Movies extends Component {
   render() {
 
     const imgSrc = 'https://image.tmdb.org/t/p/w185';
+    const imgNotFiundSrc = 'https://dummyimage.com/185x278/595959/ffffff.png&text=';
 
     let hasResultOrNot = this.props.hasResult
       ? null
@@ -38,19 +41,17 @@ class Movies extends Component {
             {this.props.fetchedMovies.map(movie => (
               <div key={movie.id}>
                 <div className='movie' onClick={() => { this.movieClicked(movie.id) }}>
-                  { movie.poster_path 
-                    ? <img src={imgSrc + movie.poster_path} title={movie.title} alt={'Poster of "' + movie.title + '"'} /> 
-                    : <p>Poster of "{movie.title}" not found</p>}
+                  {movie.poster_path
+                    ? <img src={imgSrc + movie.poster_path} title={movie.title} alt={'Poster of "' + movie.title + '"'} />
+                    : <img src={imgNotFiundSrc + movie.title} title={movie.title} alt={'Poster of "' + movie.title + '" not found'} />}
                 </div>
               </div>
-
             ))}
-
           </div>
           {hasResultOrNot}
         </section>
+        <Footer />
       </div>
-
     );
   }
 }

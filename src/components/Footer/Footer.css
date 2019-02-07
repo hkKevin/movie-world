@@ -1,0 +1,53 @@
+#footer {
+  grid-column: 2/4;
+  margin: 0 2vh;
+  margin-top: 10em;
+  margin-bottom: 5em;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15em;
+}
+
+#footer a {
+  color: #fff;
+  text-decoration: none;
+}
+
+#myName {
+  color: #01d277;
+}
+
+#myName:hover {
+  color: #fff;
+}
+
+#footer i {
+  color: #01d277;
+}
+
+#footer i:hover {
+  color: #fff;
+}
+
+#tmdb {
+  font-size: 1.7vh;
+}
+
+
+@media (max-width: 750px) {
+  #footer {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  #tmdb {
+    padding-bottom: 2.5em;
+  }
+
+  #myself {
+    padding-top: 2.5em;
+    border-top: 1px solid #fff;
+  }
+}

@@ -14,20 +14,17 @@ class Search extends Component {
   render() {
 
     return (
-      <section className='grid'>
-        <div id='search-input'>
-          <input type='text' onChange={this.onInputChange} placeholder='Search...'/>
+      <section>
+        <div className='search'>
+          <div id='searchContainer'>
+            <span id='searchIcon' className="fas fa-search"></span>
+            <input id='searchBox' type='search' onChange={this.onInputChange} placeholder='Search...' />
+          </div>
         </div>
       </section>
     );
   }
 };
-
-const mapStateToProps = state => {
-  return {
-
-  };
-}
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -35,4 +32,4 @@ const mapDispatchToProps = dispatch => {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+export default connect(null, mapDispatchToProps)(Search);

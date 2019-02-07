@@ -12,6 +12,7 @@ import 'react-accessible-accordion/dist/fancy-example.css';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import './Movie.css';
 import Header from '../Header/Header';
+import Footer from '../../components/Footer/Footer';
 
 class Movie extends Component {
 
@@ -31,8 +32,13 @@ class Movie extends Component {
         }
         prevScrollPosition = currentScrollPosition;
       }
-
     }
+
+
+
+
+
+
 
     const backdropSrc = 'https://image.tmdb.org/t/p/w1280';
     const posterSrc = 'https://image.tmdb.org/t/p/w342';
@@ -51,6 +57,7 @@ class Movie extends Component {
             if (crew.job === 'Director') {
               directorArr.push(' ' + crew.name)
             }
+            return null;
           });
           director = directorArr
         }
@@ -138,7 +145,7 @@ class Movie extends Component {
                   <div id='movieTitle'>
                     {this.props.info.title}
                   </div>
-                  <div id='yearRuntimeRating'>
+                  <div id='yearRuntimeRatingHomepage'>
                     <span id='year'>{this.props.info.release_date.substring(0, 4)}</span>
                     <div>
                       {runtimeHour}h {runtimeMin}m
@@ -148,6 +155,13 @@ class Movie extends Component {
                       {this.props.info.vote_average}
                       <span id='denominator'> / 10</span>
                     </div>
+
+                    <div>
+                      {this.props.info.homepage
+                        ? <a href={this.props.info.homepage} target='_blank' rel='noopener noreferrer' title={'Homepage of "'+this.props.info.title+'"'}><i id='homepageIcon' className="fas fa-link"></i></a>
+                        : null}
+                    </div>
+
                   </div>
                 </div>
 
@@ -185,14 +199,25 @@ class Movie extends Component {
             </div>
 
 
-            <Carousel
+            {this.props.info.images.backdrops
+              ? <Carousel
+                showIndicators={false}
+                useKeyboardArrows={true}
+                infiniteLoop={true}
+                autoPlay={true}
+                interval={5000}>
+                {backdrops}</Carousel>
+              : null
+            }
+
+            {/* <Carousel
               showIndicators={false}
               useKeyboardArrows={true}
               infiniteLoop={true}
               autoPlay={true}
               interval={5000}>
               {backdrops}
-            </Carousel>
+            </Carousel> */}
 
 
             <div className='grid'>
@@ -230,6 +255,7 @@ class Movie extends Component {
           <i id='toTop' style={{ right: '20px', bottom: '-100px' }} className="far fa-arrow-alt-circle-up fa-2x"></i>
         </a>
         {movieInfo}
+        <Footer />
       </div>
     );
   }

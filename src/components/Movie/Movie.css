@@ -25,19 +25,27 @@
   text-align: left;
 }
 
-#yearRuntimeRating {
+#yearRuntimeRatingHomepage {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   color: gray;
   margin-top: 1.5vh;
 }
 
-#yearRuntimeRating i {
+#yearRuntimeRatingHomepage i {
   margin-right: 1vh;
 }
 
 #denominator {
   font-size: 1.7vh;
+}
+
+#homepageIcon {
+  color: gray;
+}
+
+#homepageIcon:hover {
+  color: #01d277;
 }
 
 #movieDetails {
@@ -389,7 +397,7 @@
 
 @media (max-width: 560px) {
   body {
-    font-size: 2.5vh;
+    font-size: 2.3vh;
   }
 
   #videoContainer iframe {
@@ -412,10 +420,17 @@
   }
 }
 
+@media (max-width: 500px) {
+  #yearRuntimeRatingHomepage {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 400px) {
 
   body {
-    font-size: 2.7vh;
+    font-size: 2.5vh;
   }
 
   #movieInfo {

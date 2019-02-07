@@ -3,7 +3,6 @@ import axios from 'axios';
 // Action Creators:
 
 export const searchMovies = (searchText) => {
-
   return dispatch => {
     if (searchText === null || searchText === '') { return; }   // Return when user enter nothing
     const fetchedMovies = [];
@@ -53,6 +52,7 @@ export const selectMovie = (movieId) => {
       try {
         const details = await axios.get('https://api.themoviedb.org/3/movie/' + movieId + '?api_key=34af8294dab051e0d2dc34894beac01c&language=en-US&append_to_response=images&include_image_language=en,null');
         dispatch(selectMovieSuccess(details.data));
+        console.log(details.data);
       } catch (error) {
         console.error(error);
       }
@@ -62,7 +62,7 @@ export const selectMovie = (movieId) => {
       try {
         const credits = await axios.get('https://api.themoviedb.org/3/movie/' + movieId + '/credits?api_key=34af8294dab051e0d2dc34894beac01c');
         dispatch(getCreditsSuccess(credits.data));
-        console.log(credits.data);
+        // console.log(credits.data);
       } catch (error) {
         console.error(error);
       }
