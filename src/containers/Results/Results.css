@@ -15,6 +15,15 @@
   cursor: pointer;
 }
 
+.tooltip {
+  pointer-events: auto !important;
+}
+
+.tooltip:hover {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
 @media (max-width: 1100px) {
   #movies-container-grid {
     grid-template-columns: repeat(4, 1fr);

@@ -45,7 +45,7 @@
 }
 
 #homepageIcon:hover {
-  color: #01d277;
+  color: #efe1b1;
 }
 
 #movieDetails {
@@ -89,104 +89,6 @@
   gap: 1em;
 }
 
-
-
-
-#slideShow {
-  grid-column: 2/4;
-  /* margin: 0 auto; */
-}
-
-
-
-
-
-#bdContainer {
-  display: grid;
-  grid-template-columns: 1fr;
-}
-
-#backdrop {
-  /* width: 100% !important;
-  margin: 0; */
-  
-  /* grid-column: 2/4; */
-  margin: 0 auto;
-}
-
-@media (max-width: 1170px) {
-  #backdrop {
-    width: 80% !important;
-    grid-column: 2/4;
-    margin: 0 auto;
-  }
-}
-
-@media (max-width: 1130px) {
-  #backdrop {
-    width: 70% !important;
-    grid-column: 2/4;
-    margin: 0 auto;
-  }
-}
-
-@media (max-width: 1120px) {
-  #backdrop {
-    width: 60% !important;
-    grid-column: 2/4;
-    margin: 0 auto;
-  }
-}
-
-/* .carousel,
-.carousel.carousel-slider {
-  width: 100% !important;
-  margin: auto;
-}
-
-#backdrop {
-  width: 100% !important;
-  margin: 0;
-  grid-column: 2/4;
-}
-
-@media (max-width: 1200px) {
-  #backdrop,
-  .carousel,
-  .carousel.carousel-slider  {
-    width: 90% !important;
-    /* margin: auto; *
-  }
-}
-
-@media (max-width: 1130px) {
-  #backdrop,
-  .carousel,
-  .carousel.carousel-slider  {
-    width: 50% !important;
-    /* margin: auto; *
-  }
-} */
-
-/* .carousel {
-  width: 80% !important;
-  margin: auto;
-} */
-
-/* .carousel {
-  width: 100%;
-  margin: auto;
-  margin-bottom: 7vh;
-}
-
-.carousel:hover  {
-  cursor: grab;
-}
-
-.carousel:active  {
-  cursor: grabbing;
-} */
-
 #reviewText {
   /* font-size: 2vh; */
   text-align: left;
@@ -198,7 +100,8 @@
 }
 
 .accordion__title {
-  color: darkblue;
+  color: #0b1434;
+  background: #efe1b1;
   outline: none;
   padding: .2em 1em;
   width: auto;
@@ -209,7 +112,7 @@
 }
 
 .accordion__title:hover {
-  background: #ddd;
+  background: #ebdba1;
 }
 
 .accordion__body {
@@ -219,24 +122,6 @@
   white-space: pre-wrap;
   margin-bottom: 3em;
 }
-
-
-
-.far.fa-arrow-alt-circle-up {
-  position: fixed;
-  z-index: 99;
-  color: #555;
-}
-
-.far.fa-arrow-alt-circle-up:hover {
-  color: #ddd;
-  cursor: pointer;
-}
-
-
-
-
-
 
 .lds-default {
   display: inline-block;
@@ -248,7 +133,7 @@
   position: absolute;
   width: 5px;
   height: 5px;
-  background: #fff;
+  background: #efe1b1;
   border-radius: 50%;
   animation: lds-default 1.2s linear infinite;
 }
@@ -317,7 +202,7 @@
     transform: scale(1);
   }
   50% {
-    transform: scale(1.6);
+    transform: scale(1.4);
   }
 }
 

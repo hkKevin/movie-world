@@ -7,15 +7,17 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 15em;
+  color: gray;
 }
 
 #footer a {
-  color: #fff;
+  /* color: #fff; */
   text-decoration: none;
 }
 
 #myName {
-  color: #01d277;
+  /* color: #01d277; */
+  color: #efe1b1;
 }
 
 #myName:hover {
@@ -23,7 +25,8 @@
 }
 
 #footer i {
-  color: #01d277;
+  /* color: #01d277; */
+  color: #efe1b1;
 }
 
 #footer i:hover {

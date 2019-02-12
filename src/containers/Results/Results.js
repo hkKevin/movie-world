@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ReactTooltip from 'react-tooltip'
 
 import './Results.css';
-import Header from '../../components/Header/Header';
-import '../../components/Header/Header.css'
-import Search from '../../containers/Search/Search';
-import '../../containers/Search/Search.css';
 import * as actions from '../../store/action/index';
+import Header from '../../components/Header/Header';
+import Search from '../../containers/Search/Search';
 import Footer from '../../components/Footer/Footer';
-
+import JumpToTop from '../../components/JumpToTop/JumpToTop';
 
 class Movies extends Component {
+
+  componentDidUpdate() {
+    ReactTooltip.rebuild();
+  }
 
   movieClicked = movieId => {
     console.log(movieId);
@@ -34,6 +37,7 @@ class Movies extends Component {
 
     return (
       <div>
+        <ReactTooltip effect="solid" className='tooltip' type="light" delayHide={500}/>
         <Header />
         <Search />
         <section className='grid'>
@@ -42,14 +46,15 @@ class Movies extends Component {
               <div key={movie.id}>
                 <div className='movie' onClick={() => { this.movieClicked(movie.id) }}>
                   {movie.poster_path
-                    ? <img src={imgSrc + movie.poster_path} title={movie.title} alt={'Poster of "' + movie.title + '"'} />
-                    : <img src={imgNotFiundSrc + movie.title} title={movie.title} alt={'Poster of "' + movie.title + '" not found'} />}
+                    ? <img src={imgSrc + movie.poster_path} data-tip={movie.title} alt={'Poster of "' + movie.title + '"'} />
+                    : <img src={imgNotFiundSrc + movie.title} data-tip={movie.title} alt={'Poster of "' + movie.title + '" not found'} />}
                 </div>
               </div>
             ))}
           </div>
           {hasResultOrNot}
         </section>
+        <JumpToTop />
         <Footer />
       </div>
     );

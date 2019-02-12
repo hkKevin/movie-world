@@ -1,0 +1,10 @@
+#toTop {
+  position: fixed;
+  z-index: 99;
+  color: #555;
+}
+
+#toTop:hover {
+  color: #efe1b1;
+  cursor: pointer;
+}

@@ -7,38 +7,22 @@ import {
   AccordionItemTitle,
   AccordionItemBody,
 } from 'react-accessible-accordion';
+import ReactTooltip from 'react-tooltip'
 
 import 'react-accessible-accordion/dist/fancy-example.css';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import './Movie.css';
 import Header from '../Header/Header';
 import Footer from '../../components/Footer/Footer';
+import JumpToTop from '../JumpToTop/JumpToTop';
 
 class Movie extends Component {
 
+  componentDidUpdate() {
+    ReactTooltip.rebuild();
+  }
+
   render() {
-
-    let prevScrollPosition = window.pageYOffset;
-    window.onscroll = () => {
-      let currentScrollPosition = window.pageYOffset;
-      if (document.getElementById('toTop')) {
-        if (prevScrollPosition > currentScrollPosition) {
-          // show
-          // console.log('show');
-          document.getElementById('toTop').style.bottom = '20px';
-        } else if (prevScrollPosition < currentScrollPosition) {
-          // hide
-          document.getElementById('toTop').style.bottom = '-100px';
-        }
-        prevScrollPosition = currentScrollPosition;
-      }
-    }
-
-
-
-
-
-
 
     const backdropSrc = 'https://image.tmdb.org/t/p/w1280';
     const posterSrc = 'https://image.tmdb.org/t/p/w342';
@@ -70,7 +54,7 @@ class Movie extends Component {
                 cast.profile_path
                   ? (
                     <div key={cast.profile_path} className='castProfilePic'>
-                      <img src={profileSrc + cast.profile_path} alt={'Photo of ' + cast.name} title={cast.name} />
+                      <img src={profileSrc + cast.profile_path} alt={'Photo of ' + cast.name} data-tip={cast.name} />
                     </div>
                   )
                   : null
@@ -158,7 +142,7 @@ class Movie extends Component {
 
                     <div>
                       {this.props.info.homepage
-                        ? <a href={this.props.info.homepage} target='_blank' rel='noopener noreferrer' title={'Homepage of "'+this.props.info.title+'"'}><i id='homepageIcon' className="fas fa-link"></i></a>
+                        ? <a href={this.props.info.homepage} target='_blank' rel='noopener noreferrer' data-tip={'Homepage of "'+this.props.info.title+'"'}><i id='homepageIcon' className="fas fa-link"></i></a>
                         : null}
                     </div>
 
@@ -168,7 +152,7 @@ class Movie extends Component {
                 <div id='movieDetails'>
                   <div id='left'>
                     {this.props.info.poster_path
-                      ? <img src={posterSrc + this.props.info.poster_path} title={this.props.info.title} alt={'Poster of "' + this.props.info.title + '"'} />
+                      ? <img src={posterSrc + this.props.info.poster_path} alt={'Poster of "' + this.props.info.title + '"'} />
                       : <p>Poster of "{this.props.info.title}" not found</p>}
                   </div>
 
@@ -210,16 +194,6 @@ class Movie extends Component {
               : null
             }
 
-            {/* <Carousel
-              showIndicators={false}
-              useKeyboardArrows={true}
-              infiniteLoop={true}
-              autoPlay={true}
-              interval={5000}>
-              {backdrops}
-            </Carousel> */}
-
-
             <div className='grid'>
               <div id='movieInfo'>
 
@@ -250,10 +224,9 @@ class Movie extends Component {
 
     return (
       <div>
+        <ReactTooltip effect="solid" className='tooltip' type="light" delayHide={500}/>
         <Header />
-        <a href='#top'>
-          <i id='toTop' style={{ right: '20px', bottom: '-100px' }} className="far fa-arrow-alt-circle-up fa-2x"></i>
-        </a>
+        <JumpToTop />
         {movieInfo}
         <Footer />
       </div>
