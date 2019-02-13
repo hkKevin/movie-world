@@ -8,6 +8,8 @@ import {
   AccordionItemBody,
 } from 'react-accessible-accordion';
 import ReactTooltip from 'react-tooltip'
+import Fade from 'react-reveal/Fade';
+import Slide from 'react-reveal/Slide';
 
 import 'react-accessible-accordion/dist/fancy-example.css';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -68,15 +70,16 @@ class Movie extends Component {
           videos = (
             this.props.videos.results.map(video => {
               return (
-                <iframe
-                  key={video.id}
-                  title='video'
-                  width="544" height="306"
-                  src={'https://www.youtube-nocookie.com/embed/' + video.key}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen>
-                </iframe>
+                <Slide bottom key={video.id}>
+                  <iframe
+                    title='video'
+                    width="544" height="306"
+                    src={'https://www.youtube-nocookie.com/embed/' + video.key}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen>
+                  </iframe>
+                </Slide>
               );
             })
           );
@@ -98,7 +101,7 @@ class Movie extends Component {
         let reviews = null;
         if (this.props.reviews) {
           if (this.props.reviews.results.length !== 0) {
-            reviewText = <div id='reviewText'>Reviews:</div>
+            reviewText = <div id='reviewText'>Reviews</div>
           }
 
           reviews = (
@@ -106,14 +109,16 @@ class Movie extends Component {
               return (
                 review.content
                   ? (
-                    <AccordionItem key={review.id}>
-                      <AccordionItemTitle>
-                        <p>{'From ' + review.author + ':'}</p>
-                      </AccordionItemTitle>
-                      <AccordionItemBody>
-                        <p>{review.content}</p>
-                      </AccordionItemBody>
-                    </AccordionItem>
+                    <Slide bottom key={review.id}>
+                      <AccordionItem>
+                        <AccordionItemTitle>
+                          <p>{'From ' + review.author + ':'}</p>
+                        </AccordionItemTitle>
+                        <AccordionItemBody>
+                          <p>{review.content}</p>
+                        </AccordionItemBody>
+                      </AccordionItem>
+                    </Slide>
                   )
                   : null
               );
@@ -126,53 +131,60 @@ class Movie extends Component {
             <div className='grid'>
               <div id='movieInfo'>
                 <div id='movieIntro'>
-                  <div id='movieTitle'>
-                    {this.props.info.title}
-                  </div>
-                  <div id='yearRuntimeRatingHomepage'>
-                    <span id='year'>{this.props.info.release_date.substring(0, 4)}</span>
-                    <div>
-                      {runtimeHour}h {runtimeMin}m
-                    </div>
-                    <div>
-                      <i className="far fa-star fa-xs"></i>
-                      {this.props.info.vote_average}
-                      <span id='denominator'> / 10</span>
+                  <Fade>
+                    <div id='movieTitle'>
+                      {this.props.info.title}
                     </div>
 
-                    <div>
-                      {this.props.info.homepage
-                        ? <a href={this.props.info.homepage} target='_blank' rel='noopener noreferrer' data-tip={'Homepage of "'+this.props.info.title+'"'}><i id='homepageIcon' className="fas fa-link"></i></a>
-                        : null}
+                    <div id='yearRuntimeRatingHomepage'>
+                      <span id='year'>{this.props.info.release_date.substring(0, 4)}</span>
+                      <div>
+                        {runtimeHour}h {runtimeMin}m
                     </div>
+                      <div>
+                        <i className="far fa-star fa-xs"></i>
+                        {this.props.info.vote_average}
+                        <span id='denominator'> / 10</span>
+                      </div>
 
-                  </div>
+                      <div>
+                        {this.props.info.homepage
+                          ? <a href={this.props.info.homepage} target='_blank' rel='noopener noreferrer' data-tip={'Homepage of "' + this.props.info.title + '"'}><i id='homepageIcon' className="fas fa-link"></i></a>
+                          : null}
+                      </div>
+
+                    </div>
+                  </Fade>
                 </div>
 
                 <div id='movieDetails'>
-                  <div id='left'>
-                    {this.props.info.poster_path
-                      ? <img src={posterSrc + this.props.info.poster_path} alt={'Poster of "' + this.props.info.title + '"'} />
-                      : <p>Poster of "{this.props.info.title}" not found</p>}
-                  </div>
-
-                  <div id='right'>
-                    <p>{this.props.info.overview}</p>
-
-                    <div id='budgetRevenueContainer'>
-                      <p>Budget: $ {this.props.info.budget.toLocaleString()}</p>
-                      <p>Revenue: $ {this.props.info.revenue.toLocaleString()}</p>
+                  <Fade>
+                    <div id='left'>
+                      {this.props.info.poster_path
+                        ? <img src={posterSrc + this.props.info.poster_path} alt={'Poster of "' + this.props.info.title + '"'} />
+                        : <p>Poster of "{this.props.info.title}" not found</p>}
                     </div>
+                  </Fade>
 
-                    <div id='directorContainer'>
-                      {'Directed by ' + director}
+                  <Fade>
+                    <div id='right'>
+                      <p>{this.props.info.overview}</p>
+
+                      <div id='budgetRevenueContainer'>
+                        <p>Budget: $ {this.props.info.budget.toLocaleString()}</p>
+                        <p>Revenue: $ {this.props.info.revenue.toLocaleString()}</p>
+                      </div>
+
+                      <div id='directorContainer'>
+                        {'Directed by ' + director}
+                      </div>
+
+                      <div id='castContainer'>
+                        {cast}
+                      </div>
+
                     </div>
-
-                    <div id='castContainer'>
-                      {cast}
-                    </div>
-
-                  </div>
+                  </Fade>
                 </div>
 
                 <div id='videoContainer'>
@@ -224,7 +236,7 @@ class Movie extends Component {
 
     return (
       <div>
-        <ReactTooltip effect="solid" className='tooltip' type="light" delayHide={500}/>
+        <ReactTooltip effect="solid" className='tooltip' type="light" delayHide={500} />
         <Header />
         <JumpToTop />
         {movieInfo}

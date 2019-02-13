@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactTooltip from 'react-tooltip'
+import Zoom from 'react-reveal/Zoom';
 
 import './Footer.css'
 
@@ -12,7 +13,7 @@ class Footer extends Component {
   render() {
     return (
       <div className='grid'>
-        <ReactTooltip effect="solid" className='tooltip' type="light" delayHide={500}/>
+        <ReactTooltip effect="solid" className='tooltip' type="light" delayHide={100} />
         <div id='footer'>
           <div id='tmdb'>
             <a href='https://www.themoviedb.org/' target='_blank' rel='noopener noreferrer'>
@@ -25,11 +26,13 @@ class Footer extends Component {
             <p>This product uses the TMDb API but is not endorsed or certified by TMDb.</p>
           </div>
           <div id='myself'>
-            <p>Developed by
+            <Zoom>
+              <p>Developed by
               <a href='https://github.com/hkKevin' target='_blank' rel='noopener noreferrer'>
-                <span id='myName' data-tip='GitHub'> Pak Kiu Leung</span>
-              </a>
-            </p>
+                  <span id='myName' data-tip='GitHub'> Pak Kiu Leung</span>
+                </a>
+              </p>
+            </Zoom>
             <a href="https://github.com/hkKevin/movie-world" target="_blank" rel='noopener noreferrer'>
               <i className="fab fa-github fa-2x" data-tip='GitHub Repository'></i>
             </a>

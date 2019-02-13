@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactTooltip from 'react-tooltip'
+import Fade from 'react-reveal/Fade';
 
 import './Results.css';
 import * as actions from '../../store/action/index';
@@ -37,18 +38,20 @@ class Movies extends Component {
 
     return (
       <div>
-        <ReactTooltip effect="solid" className='tooltip' type="light" delayHide={500}/>
+        <ReactTooltip effect="solid" className='tooltip' type="light" delayHide={500} />
         <Header />
         <Search />
         <section className='grid'>
           <div id='movies-container-grid'>
             {this.props.fetchedMovies.map(movie => (
               <div key={movie.id}>
-                <div className='movie' onClick={() => { this.movieClicked(movie.id) }}>
-                  {movie.poster_path
-                    ? <img src={imgSrc + movie.poster_path} data-tip={movie.title} alt={'Poster of "' + movie.title + '"'} />
-                    : <img src={imgNotFiundSrc + movie.title} data-tip={movie.title} alt={'Poster of "' + movie.title + '" not found'} />}
-                </div>
+                <Fade>
+                  <div className='movie' onClick={() => { this.movieClicked(movie.id) }}>
+                    {movie.poster_path
+                      ? <img src={imgSrc + movie.poster_path} data-tip={movie.title} alt={'Poster of "' + movie.title + '"'} />
+                      : <img src={imgNotFiundSrc + movie.title} data-tip={movie.title} alt={'Poster of "' + movie.title + '" not found'} />}
+                  </div>
+                </Fade>
               </div>
             ))}
           </div>

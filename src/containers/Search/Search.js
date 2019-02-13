@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Slide from 'react-reveal/Slide';
 
 import * as actions from '../../store/action/index';
 import './Search.css';
@@ -16,10 +17,12 @@ class Search extends Component {
     return (
       <section>
         <div className='search'>
-          <div id='searchContainer'>
-            <span id='searchIcon' className="fas fa-search"></span>
-            <input id='searchBox' type='search' onChange={this.onInputChange} placeholder='Search...' />
-          </div>
+          <Slide top>
+            <div id='searchContainer'>
+              <span id='searchIcon' className="fas fa-search"></span>
+              <input id='searchBox' type='search' onChange={this.onInputChange} placeholder='Search...' />
+            </div>
+          </Slide>
         </div>
       </section>
     );

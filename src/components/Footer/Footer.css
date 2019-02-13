@@ -38,7 +38,7 @@
 }
 
 
-@media (max-width: 750px) {
+@media (max-width: 830px) {
   #footer {
     display: grid;
     grid-template-columns: 1fr;
