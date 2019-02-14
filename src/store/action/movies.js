@@ -44,8 +44,8 @@ export const searchMovies = (searchText) => {
           const searchFinished = true;
           dispatch(searchMoviesSuccess(fetchedMovies, hasResult, searchText , totalResults, totalPages, currentPage, searchFinished));
         }
-        console.log(response.data.total_results);
-        console.log(response.data.total_pages);
+        // console.log(response.data.total_results);
+        // console.log(response.data.total_pages);
       })
       .catch(error => {
         console.error(error);

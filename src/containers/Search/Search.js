@@ -7,9 +7,14 @@ import './Search.css';
 
 class Search extends Component {
 
+  componentDidMount() {
+    // Keep searchText in searchBox when returned from movie page 
+    document.getElementsByName('searchBox')[0].value = this.props.searchText;
+  }
+
   onInputChange = (event) => {
     this.props.onSearchMovies(event.target.value);  // dispatch to redux action creator with userInput
-    console.log(event.target.value);
+    // console.log(event.target.value);
   }
 
   render() {
@@ -20,7 +25,7 @@ class Search extends Component {
           <Slide top>
             <div id='searchContainer'>
               <span id='searchIcon' className="fas fa-search"></span>
-              <input id='searchBox' type='search' onChange={this.onInputChange} placeholder='Search...' />
+              <input id='searchBox' name='searchBox' type='search' onChange={this.onInputChange} placeholder='Search...' />
             </div>
           </Slide>
         </div>
@@ -29,10 +34,16 @@ class Search extends Component {
   }
 };
 
+const mapStateToProps = state => {
+  return {
+    searchText: state.searchText
+  };
+}
+
 const mapDispatchToProps = dispatch => {
   return {
     onSearchMovies: (searchText) => dispatch(actions.searchMovies(searchText))
   };
 }
 
-export default connect(null, mapDispatchToProps)(Search);
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

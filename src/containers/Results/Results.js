@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactTooltip from 'react-tooltip'
 import Fade from 'react-reveal/Fade';
-import Pagination from 'rc-pagination';
 
 import './Results.css';
 import * as actions from '../../store/action/index';
@@ -10,6 +9,7 @@ import Header from '../../components/Header/Header';
 import Search from '../../containers/Search/Search';
 import Footer from '../../components/Footer/Footer';
 import JumpToTop from '../../components/JumpToTop/JumpToTop';
+import ResultsPagination from '../../components/ResultsPagination/ResultsPagination';
 
 class Movies extends Component {
 
@@ -23,37 +23,16 @@ class Movies extends Component {
 
   onChange = (page) => {
     this.props.onPageChanged(page, this.props.searchText);
-    console.log(page);
-    this.setState({
-      current: page,
-    });
+    // console.log(page);
   }
 
-
-
   movieClicked = movieId => {
-    console.log(movieId);
+    // console.log(movieId);
     this.props.onMovieSelected(movieId);
     this.props.history.push('/movie');
   }
 
   render() {
-
-    const itemRender = (current, type, element) => {
-      if (type === 'prev') {
-        return '<';
-      }
-      if (type === 'next') {
-        return '>';
-      }
-      if (type === 'jumpPrevIcon') {
-        return '<<';
-      }
-      if (type === 'jumpNextIcon') {
-        return '>>';
-      }
-      return element;
-    };
 
     const imgSrc = 'https://image.tmdb.org/t/p/w185';
     const imgNotFiundSrc = 'https://dummyimage.com/185x278/595959/ffffff.png&text=';
@@ -72,6 +51,16 @@ class Movies extends Component {
         <ReactTooltip effect="solid" className='tooltip' type="light" />
         <Header />
         <Search />
+
+        {this.props.fetchedMovies.length !== 0
+          ? (
+            <ResultsPagination
+              onChange={this.onChange}
+              currentPage={this.props.currentPage}
+              totalPages={this.props.totalPages>1000 ? 1000 : this.props.totalPages} />
+          )
+          : null}
+
         <section className='grid'>
           <div id='movies-container-grid'>
             {this.props.fetchedMovies.map(movie => (
@@ -93,17 +82,10 @@ class Movies extends Component {
 
         {this.props.fetchedMovies.length !== 0
           ? (
-            <Pagination
+            <ResultsPagination
               onChange={this.onChange}
-              current={this.props.currentPage}
-              total={this.props.totalPages>1000 ? 1000 : this.props.totalPages}
-              pageSize={1}
-              itemRender={itemRender}
-              jumpPrevIcon='...'
-              jumpNextIcon='...'
-              showTitle={false}
-              showLessItems={true}
-              showPrevNextJumpers={false} />
+              currentPage={this.props.currentPage}
+              totalPages={this.props.totalPages>1000 ? 1000 : this.props.totalPages} />
           )
           : null}
 
