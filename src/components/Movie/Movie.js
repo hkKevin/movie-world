@@ -17,8 +17,13 @@ import './Movie.css';
 import Header from '../Header/Header';
 import Footer from '../../components/Footer/Footer';
 import JumpToTop from '../JumpToTop/JumpToTop';
+import GoBack from '../GoBack/GoBack';
 
 class Movie extends Component {
+
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
 
   componentDidUpdate() {
     ReactTooltip.rebuild();
@@ -223,21 +228,24 @@ class Movie extends Component {
         );
       } else {
         movieInfo = (
-          <div className="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+          // Spinner
+          <div className="Spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
         );
       }
 
     } else {
       movieInfo = (
-        <div className="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        // Spinner
+        <div className="Spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
       );
     }
 
 
     return (
       <div>
-        <ReactTooltip effect="solid" className='tooltip' type="light" delayHide={500} />
+        <ReactTooltip effect="solid" className='tooltip' type="light" delayHide={100} />
         <Header />
+        <GoBack />
         <JumpToTop />
         {movieInfo}
         <Footer />

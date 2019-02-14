@@ -1,10 +1,10 @@
-#toTop {
+.overlayBtn {
   position: fixed;
   z-index: 99;
   color: #555;
 }
 
-#toTop:hover {
+.overlayBtn:hover {
   color: #efe1b1;
   cursor: pointer;
 }

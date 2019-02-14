@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactTooltip from 'react-tooltip'
 import Fade from 'react-reveal/Fade';
+import Pagination from 'rc-pagination';
 
 import './Results.css';
 import * as actions from '../../store/action/index';
@@ -12,9 +13,23 @@ import JumpToTop from '../../components/JumpToTop/JumpToTop';
 
 class Movies extends Component {
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   componentDidUpdate() {
     ReactTooltip.rebuild();
   }
+
+  onChange = (page) => {
+    this.props.onPageChanged(page, this.props.searchText);
+    console.log(page);
+    this.setState({
+      current: page,
+    });
+  }
+
+
 
   movieClicked = movieId => {
     console.log(movieId);
@@ -23,6 +38,22 @@ class Movies extends Component {
   }
 
   render() {
+
+    const itemRender = (current, type, element) => {
+      if (type === 'prev') {
+        return '<';
+      }
+      if (type === 'next') {
+        return '>';
+      }
+      if (type === 'jumpPrevIcon') {
+        return '<<';
+      }
+      if (type === 'jumpNextIcon') {
+        return '>>';
+      }
+      return element;
+    };
 
     const imgSrc = 'https://image.tmdb.org/t/p/w185';
     const imgNotFiundSrc = 'https://dummyimage.com/185x278/595959/ffffff.png&text=';
@@ -38,7 +69,7 @@ class Movies extends Component {
 
     return (
       <div>
-        <ReactTooltip effect="solid" className='tooltip' type="light" delayHide={500} />
+        <ReactTooltip effect="solid" className='tooltip' type="light" />
         <Header />
         <Search />
         <section className='grid'>
@@ -55,8 +86,27 @@ class Movies extends Component {
               </div>
             ))}
           </div>
+
+
           {hasResultOrNot}
         </section>
+
+        {this.props.fetchedMovies.length !== 0
+          ? (
+            <Pagination
+              onChange={this.onChange}
+              current={this.props.currentPage}
+              total={this.props.totalPages>1000 ? 1000 : this.props.totalPages}
+              pageSize={1}
+              itemRender={itemRender}
+              jumpPrevIcon='...'
+              jumpNextIcon='...'
+              showTitle={false}
+              showLessItems={true}
+              showPrevNextJumpers={false} />
+          )
+          : null}
+
         <JumpToTop />
         <Footer />
       </div>
@@ -68,13 +118,19 @@ export const mapStateToProps = state => {
   return {
     fetchedMovies: state.movies,
     hasResult: state.hasResult,
-    searchText: state.searchText
+    searchText: state.searchText,
+    totalResults: state.totalResults,
+    totalPages: state.totalPages,
+    initialPage: state.initialPage,
+    searchFinished: state.searchFinished,
+    currentPage: state.currentPage
   };
 };
 
 export const mapDispatchToProps = dispatch => {
   return {
-    onMovieSelected: (movieId) => dispatch(actions.selectMovie(movieId))
+    onMovieSelected: (movieId) => dispatch(actions.selectMovie(movieId)),
+    onPageChanged: (page, searchText) => dispatch(actions.selectPage(page, searchText))
   };
 };
 

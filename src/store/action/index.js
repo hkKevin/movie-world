@@ -1,4 +1,5 @@
 export {
   searchMovies,
-  selectMovie
+  selectMovie,
+  selectPage
 } from './movies';

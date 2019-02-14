@@ -4,6 +4,10 @@ const initialState = {
   movies: [],
   hasResult: true,
   searchText: "",
+  totalResults: 0,
+  totalPages: 0,
+  currentPage: 0,
+  searchFinished: false,
   movieDetails: null,
   movieId: null,
   credits: null,
@@ -13,14 +17,18 @@ const initialState = {
 
 const movies = (state = initialState, action) => {
 
-  switch ( action.type) {
+  switch ( action.type ) {
     
     case 'SEARCH_MOVIES_SUCCESS':
       return {
         ...state,
         movies: action.movies,
         hasResult: action.hasResult,
-        searchText: action.searchText
+        searchText: action.searchText,
+        totalResults: action.totalResults,
+        totalPages: action.totalPages,
+        currentPage: action.currentPage,
+        searchFinished: action.searchFinished
       };
 
     case 'SELECT_MOVIE_SUCCESS':
@@ -52,6 +60,13 @@ const movies = (state = initialState, action) => {
         ...state,
         reviews: action.reviews
       }
+
+    case 'SELECT_PAGE_SUCCESS':
+      return {
+        ...state,
+        movies: action.movies,
+        currentPage: action.currentPage
+      };
 
     default:
       return state;
