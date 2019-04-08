@@ -1,3 +1,20 @@
+[Live Website](https://festive-curie-c1aab0.netlify.com/)
+
+![Screenshot of Movie World](https://raw.githubusercontent.com/hkKevin/hkKevin.github.io/master/img/projects/movie-world.png)
+
+## Features
+
+* Fetches movie info with Async. HTTP Requests from an API
+* Presents movie info (posters, trailers, reviews etc.) in a modern design
+* Offers pagination for multiple pages of search results
+* Navigates the web app with React Router
+* Rotates movie posters automatically through a carousel
+* Reveals comfortable animation when scrolling
+* Supports responsive web design
+
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
