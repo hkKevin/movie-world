@@ -44,10 +44,10 @@
 }
 
 @media (max-width: 420px) {
-  #movies-container-grid {
-    grid-template-columns: 1fr;
-  }
   #search-input input {
     width: 80% !important;
+  }
+  .movie img {
+    width: 140px;
   }
 }

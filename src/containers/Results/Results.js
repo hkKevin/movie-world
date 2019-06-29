@@ -35,7 +35,7 @@ class Movies extends Component {
   render() {
 
     const imgSrc = 'https://image.tmdb.org/t/p/w185';
-    const imgNotFiundSrc = 'https://dummyimage.com/185x278/595959/ffffff.png&text=';
+    const imgNotFoundSrc = 'https://dummyimage.com/185x278/595959/ffffff.png&text=';
 
     let hasResultOrNot = this.props.hasResult
       ? null
@@ -69,7 +69,7 @@ class Movies extends Component {
                   <div className='movie' onClick={() => { this.movieClicked(movie.id) }}>
                     {movie.poster_path
                       ? <img src={imgSrc + movie.poster_path} data-tip={movie.title} alt={'Poster of "' + movie.title + '"'} />
-                      : <img src={imgNotFiundSrc + movie.title} data-tip={movie.title} alt={'Poster of "' + movie.title + '" not found'} />}
+                      : <img src={imgNotFoundSrc + movie.title} data-tip={movie.title} alt={'Poster of "' + movie.title + '" not found'} />}
                   </div>
                 </Fade>
               </div>
