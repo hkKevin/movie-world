@@ -25,7 +25,7 @@ class Search extends Component {
           <Slide top>
             <div id='searchContainer'>
               <span id='searchIcon' className="fas fa-search"></span>
-              <input id='searchBox' name='searchBox' type='search' onChange={this.onInputChange} placeholder='Search...' />
+              <input id='searchBox' name='searchBox' type='search' onChange={this.onInputChange} placeholder='Movie Name...' autoFocus />
             </div>
           </Slide>
         </div>
