@@ -10,21 +10,17 @@ class JumpToTop extends Component {
   }
 
   render() {
-    let prevScrollPosition = window.pageYOffset;
-    window.onscroll = () => {
-      let currentScrollPosition = window.pageYOffset;
-      if (document.getElementById('toTop')) {
-        if (prevScrollPosition > currentScrollPosition) {
-          // show:
-          // console.log('show');
-          document.getElementById('toTop').style.bottom = '20px';
-        } else if (prevScrollPosition < currentScrollPosition) {
-          // hide:
-          document.getElementById('toTop').style.bottom = '-100px';
-        }
-        prevScrollPosition = currentScrollPosition;
+    // Activate jQuery in React
+    const $ = window.$;
+
+    $(window).scroll(function() {
+      let height = $(window).scrollTop();
+      if (height > 500) {
+        $('#toTop').fadeIn();
+      } else {
+        $('#toTop').fadeOut();
       }
-    }
+    });
 
     const toTopClicked = () => {
       window.scrollTo(0, 0);
@@ -36,7 +32,6 @@ class JumpToTop extends Component {
         <ReactTooltip effect="solid" className='tooltip' type="light" />
         <i
           id='toTop'
-          style={{ right: '20px', bottom: '-100px' }}
           className="fas fa-chevron-circle-up fa-2x overlayBtn"
           onClick={toTopClicked}
           data-tip='TOP'></i>

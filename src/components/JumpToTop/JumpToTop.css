@@ -1,3 +1,9 @@
+#toTop {
+  display: none;
+  bottom: 20px;
+  right: 20px;
+}
+
 .overlayBtn {
   position: fixed;
   z-index: 99;
