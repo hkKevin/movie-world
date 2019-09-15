@@ -15,5 +15,5 @@
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr repeat(2, minmax(auto, 30em)) 1fr;
+  grid-template-columns: 1fr minmax(auto, 36em) minmax(auto, 36em) 1fr;
 }
