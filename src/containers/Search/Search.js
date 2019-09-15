@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Slide from 'react-reveal/Slide';
+import Fade from 'react-reveal/Fade';
 
 import * as actions from '../../store/action/index';
 import './Search.css';
@@ -11,23 +11,22 @@ class Search extends Component {
     // Keep searchText in searchBox when returned from movie page 
     document.getElementsByName('searchBox')[0].value = this.props.searchText;
   }
-
+  
   onInputChange = (event) => {
     this.props.onSearchMovies(event.target.value);  // dispatch to redux action creator with userInput
-    // console.log(event.target.value);
   }
 
-  render() {
+  render() {  
 
     return (
       <section>
         <div className='search'>
-          <Slide top>
+          <Fade>
             <div id='searchContainer'>
               <span id='searchIcon' className="fas fa-search"></span>
               <input id='searchBox' name='searchBox' type='search' onChange={this.onInputChange} placeholder='Movie Name...' autoFocus />
             </div>
-          </Slide>
+          </Fade>
         </div>
       </section>
     );

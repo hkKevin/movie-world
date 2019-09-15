@@ -36,59 +36,62 @@ class Movies extends Component {
 
     const imgSrc = 'https://image.tmdb.org/t/p/w185';
     const imgNotFoundSrc = 'https://dummyimage.com/185x278/595959/ffffff.png&text=';
+    let hasResultOrNot = null;
+    let searchResults = null;
+    let resultsPagination = null;
 
-    let hasResultOrNot = this.props.hasResult
-      ? null
-      : (
-        <div id='has-result-or-not'>
-          <h3>NO SEARCH RESULTS FOUND</h3>
-          <p>There are no movies that matched "{this.props.searchText}".</p>
-        </div>
+    // Notice users movie not found
+    if ( this.props.searchText && !this.props.hasResult ) {
+        hasResultOrNot = (
+          <div id='has-result-or-not'>
+            <h3>NO SEARCH RESULTS FOUND</h3>
+            <p>There are no movies that matched "{this.props.searchText}".</p>
+          </div>
+        )
+    }
+
+    // Show movie results only if user enter movie name (search text)
+    if ( this.props.searchText !== null || this.props.searchText !== '' ) {
+      searchResults = (
+        this.props.fetchedMovies.map(movie => (
+          <div key={movie.id}>
+            <Fade>
+              <div className='movie' onClick={() => { this.movieClicked(movie.id) }}>
+                {movie.poster_path
+                  ? <img src={imgSrc + movie.poster_path} data-tip={movie.title} alt={'Poster of "' + movie.title + '"'} />
+                  : <img src={imgNotFoundSrc + movie.title} data-tip={movie.title} alt={'Poster of "' + movie.title + '" not found'} />}
+              </div>
+            </Fade>
+          </div>
+        ))
       )
+    }
+
+    // Show pagination
+    if ( this.props.fetchedMovies.length !== 0 ) {
+      resultsPagination = (
+        <ResultsPagination
+          onChange={this.onChange}
+          currentPage={this.props.currentPage}
+          totalPages={this.props.totalPages>1000 ? 1000 : this.props.totalPages} />
+      );
+    }
 
     return (
       <div>
         <ReactTooltip effect="solid" className='tooltip' type="light" />
         <Header />
         <Search />
-
-        {this.props.fetchedMovies.length !== 0
-          ? (
-            <ResultsPagination
-              onChange={this.onChange}
-              currentPage={this.props.currentPage}
-              totalPages={this.props.totalPages>1000 ? 1000 : this.props.totalPages} />
-          )
-          : null}
+        {resultsPagination}
 
         <section className='grid'>
           <div id='movies-container-grid'>
-            {this.props.fetchedMovies.map(movie => (
-              <div key={movie.id}>
-                <Fade>
-                  <div className='movie' onClick={() => { this.movieClicked(movie.id) }}>
-                    {movie.poster_path
-                      ? <img src={imgSrc + movie.poster_path} data-tip={movie.title} alt={'Poster of "' + movie.title + '"'} />
-                      : <img src={imgNotFoundSrc + movie.title} data-tip={movie.title} alt={'Poster of "' + movie.title + '" not found'} />}
-                  </div>
-                </Fade>
-              </div>
-            ))}
+            {searchResults}
           </div>
-
-
           {hasResultOrNot}
         </section>
 
-        {this.props.fetchedMovies.length !== 0
-          ? (
-            <ResultsPagination
-              onChange={this.onChange}
-              currentPage={this.props.currentPage}
-              totalPages={this.props.totalPages>1000 ? 1000 : this.props.totalPages} />
-          )
-          : null}
-
+        {resultsPagination}
         <JumpToTop />
         <Footer />
       </div>

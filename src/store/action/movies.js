@@ -9,9 +9,9 @@ import axios from 'axios';
 //   };
 // }
 
-// const fetchedMovies = [];
 let fetchedMovies = [];
 let hasResult = false;
+let searchFinished = false;
 let totalResults = 0;
 let totalPages = 0;
 let currentPage = 0;
@@ -19,29 +19,36 @@ let currentPage = 0;
 export const searchMovies = (searchText) => {
 
   return dispatch => {
-    // dispatch(storeSearchText(searchText));
-    if (searchText === null || searchText === '') { return; }   // Return when user enter nothing
-    // const fetchedMovies = [];
-    // let hasResult = false;
-    // let totalResults = 0;
-    // let totalPages = 0;
-    // let currentPage = 0;
+    // Return when user enter nothing
+    if (searchText === null || searchText === '') {
+      fetchedMovies = [];
+      hasResult = false;
+      searchFinished = true;
+      totalResults = 0;
+      dispatch(searchMoviesFail(fetchedMovies, hasResult, searchFinished, totalResults, searchText));
+      return;
+    }
+
+    // Requesting the API
     axios.get('https://api.themoviedb.org/3/search/movie?api_key=34af8294dab051e0d2dc34894beac01c&language=en-US&query='
       + searchText + '&page=1&include_adult=false')
       .then(response => {
         fetchedMovies = [];
-        dispatch(searchMoviesSuccess(fetchedMovies));
+        // dispatch(searchMoviesSuccess(fetchedMovies));
         for (let key in response.data.results) {
           fetchedMovies.push(response.data.results[key])
         }
+        // console.log(fetchedMovies);
         if (fetchedMovies.length === 0) {
+          hasResult = false;
           dispatch(searchMoviesSuccess(fetchedMovies, hasResult, searchText));
         } else {
           hasResult = true;
           totalResults = response.data.total_results;
           totalPages = response.data.total_pages;
           currentPage = response.data.page;
-          const searchFinished = true;
+          // const searchFinished = true;
+          searchFinished = true;
           dispatch(searchMoviesSuccess(fetchedMovies, hasResult, searchText , totalResults, totalPages, currentPage, searchFinished));
         }
         // console.log(response.data.total_results);
@@ -63,6 +70,17 @@ export const searchMoviesSuccess = (fetchedMovies, hasResult, searchText, totalR
     totalPages: totalPages,
     currentPage: currentPage,
     searchFinished: searchFinished
+  };
+}
+
+export const searchMoviesFail = (fetchedMovies, hasResult, searchFinished, totalResults, searchText) => {
+  return {
+    type: 'SEARCH_MOVIES_FAIL',
+    movies: fetchedMovies,
+    hasResult: hasResult,
+    searchFinished: searchFinished,
+    totalResults: totalResults,
+    searchText: searchText
   };
 }
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactTooltip from 'react-tooltip'
-import Zoom from 'react-reveal/Zoom';
+import Fade from 'react-reveal/Fade';
 
 import './Footer.css'
 
@@ -26,13 +26,13 @@ class Footer extends Component {
             <p>This product uses the TMDb API but is not endorsed or certified by TMDb.</p>
           </div>
           <div id='myself'>
-            <Zoom>
+            <Fade bottom>
               <p>Developed by
               <a href='https://github.com/hkKevin' target='_blank' rel='noopener noreferrer'>
-                  <span id='myName' data-tip='GitHub'> Pak Kiu Leung</span>
+                  <span id='myName' data-tip='GitHub Profile'> Pak Kiu Leung</span>
                 </a>
               </p>
-            </Zoom>
+            </Fade>
             <a href="https://github.com/hkKevin/movie-world" target="_blank" rel='noopener noreferrer'>
               <i className="fab fa-github fa-2x" data-tip='GitHub Repository'></i>
             </a>

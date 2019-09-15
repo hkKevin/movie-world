@@ -2,7 +2,6 @@
 
 const initialState = {
   movies: [],
-  hasResult: true,
   searchText: "",
   totalResults: 0,
   totalPages: 0,
@@ -28,6 +27,16 @@ const movies = (state = initialState, action) => {
         totalResults: action.totalResults,
         totalPages: action.totalPages,
         currentPage: action.currentPage,
+        searchFinished: action.searchFinished
+      };
+    
+    case 'SEARCH_MOVIES_FAIL':
+      return {
+        ...state,
+        movies: action.movies,
+        hasResult: action.hasResult,
+        searchText: action.searchText,
+        totalResults: action.totalResults,
         searchFinished: action.searchFinished
       };
 

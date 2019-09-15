@@ -43,6 +43,7 @@ class Movie extends Component {
 
         let director = null;
         const directorArr = [];
+        // Get director name(s)
         if (this.props.credits) {
           this.props.credits.crew.map(crew => {
             if (crew.job === 'Director') {
@@ -54,6 +55,7 @@ class Movie extends Component {
         }
 
         let cast = null;
+        // Get the first 5 casts
         if (this.props.credits) {
           cast = (
             this.props.credits.cast.slice(0, 5).map(cast => {
@@ -71,6 +73,7 @@ class Movie extends Component {
         }
 
         let videos = null;
+        // Get YouTube videos
         if (this.props.videos) {
           videos = (
             this.props.videos.results.map(video => {
@@ -91,6 +94,7 @@ class Movie extends Component {
         }
 
         let backdrops = null;
+        // Get backdrops (16:9 poster)
         if (this.props.info) {
           backdrops = (
             this.props.info.images.backdrops.map(backdrop => {
@@ -109,6 +113,8 @@ class Movie extends Component {
             reviewText = <div id='reviewText'>Reviews</div>
           }
 
+          
+          // Get reviews
           reviews = (
             this.props.reviews.results.map(review => {
               return (

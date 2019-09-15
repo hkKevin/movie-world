@@ -9,17 +9,12 @@ html {
 body {
   margin: 0;
   padding: 0;
-
   text-align: center;
   background-color: #0b1434;
-  /* background-color: #1d293d; */
   color: #efe1b1;
-  /* color: #fabc96; */
-  font-size: 2vh;
-  line-height: 4vh;
+  font-size: 1em;
+  line-height: 2em;
   font-family: 'Open Sans', sans-serif;
-  
-
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -31,6 +26,7 @@ code {
 
 ::selection {
   background: #f6eed2;
+  color: #0b1434;
 }
 
 .wow {
