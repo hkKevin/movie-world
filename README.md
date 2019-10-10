@@ -1,4 +1,4 @@
-[Live Website](https://festive-curie-c1aab0.netlify.com/)
+[Live Website](https://hkkevin.github.io/movie-world)
 
 ![Screenshot of Movie World](https://raw.githubusercontent.com/hkKevin/hkKevin.github.io/master/img/projects/movie-world.png)
 
