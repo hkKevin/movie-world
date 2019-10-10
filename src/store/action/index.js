@@ -1,3 +1,0 @@
-export {
-  searchMovies
-} from './movies';
