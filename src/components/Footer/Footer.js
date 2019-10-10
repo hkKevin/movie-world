@@ -27,9 +27,9 @@ class Footer extends Component {
           </div>
           <div id='myself'>
             <Fade bottom>
-              <p>Developed by
+              <p>Developed by&nbsp;
               <a href='https://github.com/hkKevin' target='_blank' rel='noopener noreferrer'>
-                  <span id='myName' data-tip='GitHub Profile'> Pak Kiu Leung</span>
+                  <span id='myName' data-tip='GitHub Profile'>Pak Kiu Leung (Kevin)</span>
                 </a>
               </p>
             </Fade>
