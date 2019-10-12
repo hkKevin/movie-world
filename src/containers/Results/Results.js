@@ -29,7 +29,7 @@ class Movies extends Component {
   movieClicked = movieId => {
     // console.log(movieId);
     this.props.onMovieSelected(movieId);
-    this.props.history.push('/movie');
+    this.props.history.push('/movie-world/movie');
   }
 
   render() {
