@@ -29,7 +29,7 @@ class Footer extends Component {
             <Fade bottom>
               <p>Developed by&nbsp;
               <a href='https://github.com/hkKevin' target='_blank' rel='noopener noreferrer'>
-                  <span id='myName' data-tip='GitHub Profile'>Pak Kiu LEUNG (Kevin)</span>
+                  <span id='myName' data-tip='GitHub Profile'>Pak Kiu Leung (Kevin)</span>
                 </a>
               </p>
             </Fade>
