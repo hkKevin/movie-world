@@ -11,12 +11,19 @@ const initialState = {
   movieId: null,
   credits: null,
   reviews: null,
-  videos: null
+  videos: null,
+  loading: false
 }
 
 const movies = (state = initialState, action) => {
 
   switch ( action.type ) {
+
+    case 'SEARCH_MOVIES_START':
+      return {
+        ...state,
+        loading: true
+      };
     
     case 'SEARCH_MOVIES_SUCCESS':
       return {
@@ -27,7 +34,8 @@ const movies = (state = initialState, action) => {
         totalResults: action.totalResults,
         totalPages: action.totalPages,
         currentPage: action.currentPage,
-        searchFinished: action.searchFinished
+        searchFinished: action.searchFinished,
+        loading: false
       };
     
     case 'SEARCH_MOVIES_FAIL':
@@ -37,7 +45,8 @@ const movies = (state = initialState, action) => {
         hasResult: action.hasResult,
         searchText: action.searchText,
         totalResults: action.totalResults,
-        searchFinished: action.searchFinished
+        searchFinished: action.searchFinished,
+        loading: false
       };
 
     case 'SELECT_MOVIE_SUCCESS':
@@ -70,11 +79,24 @@ const movies = (state = initialState, action) => {
         reviews: action.reviews
       }
 
+    case 'SELECT_PAGE_START':
+      return {
+        ...state,
+        loading: true
+      };
+
     case 'SELECT_PAGE_SUCCESS':
       return {
         ...state,
         movies: action.movies,
-        currentPage: action.currentPage
+        currentPage: action.currentPage,
+        loading: false
+      };
+    
+    case 'SELECT_PAGE_FAIL':
+      return {
+        ...state,
+        loading: false
       };
 
     default:

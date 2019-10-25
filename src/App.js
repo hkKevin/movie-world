@@ -7,7 +7,7 @@ import Movie from './components/Movie/Movie';
 
 
 class App extends Component {
-
+  
   render() {
 
     let routes = (

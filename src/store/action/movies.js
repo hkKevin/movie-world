@@ -20,6 +20,7 @@ export const searchMovies = (searchText) => {
 
   return dispatch => {
     // Return when user enter nothing
+    dispatch(searchMoviesStart());
     if (searchText === null || searchText === '') {
       fetchedMovies = [];
       hasResult = false;
@@ -29,34 +30,39 @@ export const searchMovies = (searchText) => {
       return;
     }
 
-    // Requesting the API
     axios.get('https://api.themoviedb.org/3/search/movie?api_key=34af8294dab051e0d2dc34894beac01c&language=en-US&query='
-      + searchText + '&page=1&include_adult=false')
-      .then(response => {
-        fetchedMovies = [];
-        // dispatch(searchMoviesSuccess(fetchedMovies));
-        for (let key in response.data.results) {
-          fetchedMovies.push(response.data.results[key])
-        }
-        // console.log(fetchedMovies);
-        if (fetchedMovies.length === 0) {
-          hasResult = false;
-          dispatch(searchMoviesSuccess(fetchedMovies, hasResult, searchText));
-        } else {
-          hasResult = true;
-          totalResults = response.data.total_results;
-          totalPages = response.data.total_pages;
-          currentPage = response.data.page;
-          // const searchFinished = true;
-          searchFinished = true;
-          dispatch(searchMoviesSuccess(fetchedMovies, hasResult, searchText , totalResults, totalPages, currentPage, searchFinished));
-        }
-        // console.log(response.data.total_results);
-        // console.log(response.data.total_pages);
-      })
-      .catch(error => {
-        console.error(error);
-      })
+    + searchText + '&page=1&include_adult=false')
+    .then(response => {
+      fetchedMovies = [];
+      // dispatch(searchMoviesSuccess(fetchedMovies));
+      for (let key in response.data.results) {
+        fetchedMovies.push(response.data.results[key])
+      }
+      // console.log(fetchedMovies);
+      if (fetchedMovies.length === 0) {
+        hasResult = false;
+        dispatch(searchMoviesSuccess(fetchedMovies, hasResult, searchText));
+      } else {
+        hasResult = true;
+        totalResults = response.data.total_results;
+        totalPages = response.data.total_pages;
+        currentPage = response.data.page;
+        // const searchFinished = true;
+        searchFinished = true;
+        dispatch(searchMoviesSuccess(fetchedMovies, hasResult, searchText , totalResults, totalPages, currentPage, searchFinished));
+      }
+      // console.log(response.data.total_results);
+      // console.log(response.data.total_pages);
+    })
+    .catch(error => {
+      console.error(error);
+    })
+  };
+};
+
+export const searchMoviesStart = () => {
+  return {
+    type: 'SEARCH_MOVIES_START'
   };
 };
 
@@ -71,7 +77,7 @@ export const searchMoviesSuccess = (fetchedMovies, hasResult, searchText, totalR
     currentPage: currentPage,
     searchFinished: searchFinished
   };
-}
+};
 
 export const searchMoviesFail = (fetchedMovies, hasResult, searchFinished, totalResults, searchText) => {
   return {
@@ -82,7 +88,7 @@ export const searchMoviesFail = (fetchedMovies, hasResult, searchFinished, total
     totalResults: totalResults,
     searchText: searchText
   };
-}
+};
 
 export const setMovieId = (movieId) => {
   return {
@@ -187,6 +193,7 @@ export const getReviewsSuccess = (reviews) => {
 
 export const selectPage = (page, searchText) => {
   return dispatch => {
+    dispatch(selectPageStart());
     fetchedMovies = [];
     hasResult = false;
     totalResults = 0;
@@ -207,9 +214,22 @@ export const selectPage = (page, searchText) => {
       })
       .catch(error => {
         console.error(error);
+        dispatch(selectPageFail(fetchedMovies, currentPage));
       })
   };
 };
+
+export const selectPageStart = () => {
+  return {
+    type: 'SELECT_PAGE_START'
+  }
+}
+
+export const selectPageFail = () => {
+  return {
+    type: 'SELECT_PAGE_FAIL'
+  }
+}
 
 export const selectPageSuccess = (fetchedMovies, currentPage) => {
   window.scrollTo(0, 0);
