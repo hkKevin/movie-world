@@ -8,12 +8,11 @@
 .Spinner,
 .Spinner:after {
   border-radius: 50%;
-  width: 10em;
-  height: 10em;
-  margin: 60px auto;  
+  width: 5em;
+  height: 5em;
+  margin: 1em auto;  
 }
 .Spinner {
-  margin: 60px auto;
   font-size: 1em;
   position: relative;
   text-indent: -9999em;

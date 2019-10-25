@@ -18,6 +18,7 @@ import Header from '../Header/Header';
 import Footer from '../../components/Footer/Footer';
 import JumpToTop from '../JumpToTop/JumpToTop';
 import GoBack from '../GoBack/GoBack';
+import Spinner from '../Spinner/Spinner';
 
 class Movie extends Component {
 
@@ -234,15 +235,13 @@ class Movie extends Component {
         );
       } else {
         movieInfo = (
-          // Spinner
-          <div className="Spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+          <Spinner />
         );
       }
 
     } else {
       movieInfo = (
-        // Spinner
-        <div className="Spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        <Spinner />
       );
     }
 
