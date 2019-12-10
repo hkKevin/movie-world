@@ -4,7 +4,7 @@
 
 ## Features
 
-* Utilizing React, Redux, react-router, axios, CSS Grid Layout, react-reveal, etc.
+* Utilizes React, Redux, react-router, axios, CSS Grid Layout, react-reveal, etc.
 * Fetches movie info with Async. HTTP Requests from an API
 * Presents movie info (posters, trailers, reviews, etc.) in a responsive layout
 * Offers pagination for multiple pages of search results
