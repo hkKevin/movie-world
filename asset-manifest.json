@@ -1,15 +1,15 @@
 {
-  "main.css": "/movie-world/static/css/main.e07de552.chunk.css",
-  "main.js": "/movie-world/static/js/main.5989a825.chunk.js",
-  "main.js.map": "/movie-world/static/js/main.5989a825.chunk.js.map",
+  "main.css": "/movie-world/static/css/main.7ac2d9bb.chunk.css",
+  "main.js": "/movie-world/static/js/main.ba837d67.chunk.js",
+  "main.js.map": "/movie-world/static/js/main.ba837d67.chunk.js.map",
   "static/css/1.beb21b13.chunk.css": "/movie-world/static/css/1.beb21b13.chunk.css",
   "static/js/1.4a6fcacd.chunk.js": "/movie-world/static/js/1.4a6fcacd.chunk.js",
   "static/js/1.4a6fcacd.chunk.js.map": "/movie-world/static/js/1.4a6fcacd.chunk.js.map",
   "runtime~main.js": "/movie-world/static/js/runtime~main.83ea77d6.js",
   "runtime~main.js.map": "/movie-world/static/js/runtime~main.83ea77d6.js.map",
   "static/css/1.beb21b13.chunk.css.map": "/movie-world/static/css/1.beb21b13.chunk.css.map",
-  "static/css/main.e07de552.chunk.css.map": "/movie-world/static/css/main.e07de552.chunk.css.map",
+  "static/css/main.7ac2d9bb.chunk.css.map": "/movie-world/static/css/main.7ac2d9bb.chunk.css.map",
   "index.html": "/movie-world/index.html",
-  "precache-manifest.1f2111e830e37295be0a2ddf03e4f50a.js": "/movie-world/precache-manifest.1f2111e830e37295be0a2ddf03e4f50a.js",
+  "precache-manifest.9d128ef756a7f97323d0fb10e84d66bb.js": "/movie-world/precache-manifest.9d128ef756a7f97323d0fb10e84d66bb.js",
   "service-worker.js": "/movie-world/service-worker.js"
 }
