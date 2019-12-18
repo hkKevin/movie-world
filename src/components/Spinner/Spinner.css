@@ -8,18 +8,18 @@
 .Spinner,
 .Spinner:after {
   border-radius: 50%;
-  width: 5em;
-  height: 5em;
+  width: 3em;
+  height: 3em;
   margin: 1em auto;  
 }
 .Spinner {
   font-size: 1em;
   position: relative;
   text-indent: -9999em;
-  border-top: .3em solid #efe1b1;
-  border-right: .3em solid #0b1434;
-  border-bottom: .3em solid #efe1b1;
-  border-left: .3em solid #0b1434;
+  border-top: .2em solid #efe1b1;
+  border-right: .2em solid #efe1b1;
+  border-bottom: .2em solid #efe1b1;
+  border-left: .2em solid #0b1434;
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);
