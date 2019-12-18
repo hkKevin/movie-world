@@ -1,16 +1,17 @@
-[Live Website](https://hkkevin.github.io/movie-world)
+[LIVE WEB APP](https://hkkevin.github.io/movie-world)
 
 ![Screenshot of Movie World](https://raw.githubusercontent.com/hkKevin/hkKevin.github.io/master/img/projects/movie-world.png)
 
 ## Features
 
+* Utilizes React, Redux, react-router, axios, CSS Grid Layout, react-reveal, etc.
 * Fetches movie info with Async. HTTP Requests from an API
-* Presents movie info (posters, trailers, reviews etc.) in a modern design
+* Presents movie info (posters, trailers, reviews, etc.) in a responsive layout
 * Offers pagination for multiple pages of search results
 * Navigates the web app with React Router
 * Rotates movie posters automatically through a carousel
 * Reveals comfortable animation when scrolling
-* Supports responsive web design
+* Supports Responsive Web Design
 
 
 ---
