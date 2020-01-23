@@ -23,7 +23,7 @@ class Search extends Component {
         <div className='search'>
           <Fade>
             <div id='searchContainer'>
-              <span id='searchIcon' className="fas fa-search"></span>
+              {/* <span id='searchIcon' className="fas fa-search"></span> */}
               <input id='searchBox' name='searchBox' type='search' onChange={this.onInputChange} placeholder='Movie Name...' autoFocus />
             </div>
           </Fade>

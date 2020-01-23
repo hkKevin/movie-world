@@ -11,7 +11,8 @@
 
 .movie {
   display: inline-block;
-  margin-top: 1vh;
+  /* margin-top: 1vh; */
+  margin-top: 1em;
   cursor: pointer;
 }
 

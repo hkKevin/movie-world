@@ -1,8 +1,9 @@
 #footer {
   grid-column: 2/4;
-  margin: 0 2vh;
+  /* margin: 0 2vh; */
   margin-top: 10em;
   margin-bottom: 5em;
+  margin: 10em 2em 5em 2em;
 
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -34,7 +35,8 @@
 }
 
 #tmdb {
-  font-size: 1.7vh;
+  /* font-size: 1.7vh; */
+  font-size: 0.8em;
 }
 
 
