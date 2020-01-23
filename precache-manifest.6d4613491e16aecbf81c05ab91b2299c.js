@@ -4,23 +4,23 @@ self.__precacheManifest = [
     "url": "/movie-world/static/js/runtime~main.83ea77d6.js"
   },
   {
-    "revision": "4cdda8e26769df0363cf",
-    "url": "/movie-world/static/js/main.4cdda8e2.chunk.js"
+    "revision": "b402d1b52c48e04be0db",
+    "url": "/movie-world/static/js/main.b402d1b5.chunk.js"
   },
   {
     "revision": "4a6fcacdf6650270e5ab",
     "url": "/movie-world/static/js/1.4a6fcacd.chunk.js"
   },
   {
-    "revision": "4cdda8e26769df0363cf",
-    "url": "/movie-world/static/css/main.ccf2723f.chunk.css"
+    "revision": "b402d1b52c48e04be0db",
+    "url": "/movie-world/static/css/main.0dac90e2.chunk.css"
   },
   {
     "revision": "4a6fcacdf6650270e5ab",
     "url": "/movie-world/static/css/1.beb21b13.chunk.css"
   },
   {
-    "revision": "ff2b62020a516f3abed873e5bfde07fe",
+    "revision": "01bc11a6cfc6151ae6f40304d780fecd",
     "url": "/movie-world/index.html"
   }
 ];
