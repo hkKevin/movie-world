@@ -5,7 +5,7 @@
 
 #movieInfo {
   grid-column: 2/4;
-  margin: 0 2vh;
+  margin: 0 2em;
 }
 
 #movieIntro {
@@ -18,10 +18,9 @@
 }
 
 #movieTitle {
-  font-size: 4vh;
-  line-height: 6vh;
-  margin-top: 0;  
-  margin-bottom: 1vh;
+  font-size: 2em;
+  line-height: 1em;
+  margin-top: 0;
   text-align: left;
 }
 
@@ -29,15 +28,15 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   color: gray;
-  margin-top: 1.5vh;
+  margin-top: 1em;
 }
 
 #yearRuntimeRatingHomepage i {
-  margin-right: 1vh;
+  margin-right: 1em;
 }
 
 #denominator {
-  font-size: 1.7vh;
+  font-size: 0.7em;
 }
 
 #homepageIcon {
@@ -54,7 +53,7 @@
 }
 
 #left {
-  padding: 2vh 0;
+  padding: 1em 0;
 }
 
 #right {
@@ -75,7 +74,7 @@
 #castContainer {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  margin: 3vh 0;
+  margin: 2em 0;
 }
 
 .castProfilePic > img {
@@ -83,20 +82,14 @@
 }
 
 #videoContainer {
-  margin-bottom: 8vh;
+  margin-bottom: 2em;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1em;
 }
 
 #reviewText {
-  /* font-size: 2vh; */
   text-align: left;
-  margin-bottom: 2vh;
-}
-
-.accordion {
-  margin-bottom: 4em;
 }
 
 .accordion__title {
@@ -118,7 +111,7 @@
 .accordion__body {
   text-align: left;
   border: none;
-  padding: 0 30vh;
+  padding: 0 12em;
   white-space: pre-wrap;
   margin-bottom: 3em;
 }
@@ -138,7 +131,7 @@
 
 @media (max-width: 1150px) {
   #videoContainer iframe {
-    margin: 1vh auto;
+    margin: 1em auto;
     width: 480px;
     height: 270px;
   }
@@ -154,7 +147,7 @@
 
 @media (max-width: 950px) {
   .accordion__body {
-    padding: 0 20vh;
+    padding: 0 10em;
   }  
 }
 
@@ -182,23 +175,20 @@
 
 @media (max-width: 700px) {
   .accordion__body {
-    padding: 0 15vh;
+    padding: 0 8em;
   }  
 }
 
 @media (max-width: 620px) {
   .accordion__body {
-    padding: 0 10vh;
+    padding: 0 6em;
   }  
 }
 
 @media (max-width: 560px) {
-  body {
-    font-size: 2.3vh;
-  }
 
   #videoContainer iframe {
-    margin: 1vh auto;
+    margin: 0.5em auto;
     width: 272px;
     height: 153px;
   }
@@ -224,14 +214,14 @@
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 450px) {
 
   body {
-    font-size: 2.5vh;
+    font-size: 1.1em;
   }
 
   #movieInfo {
-    margin: 0 2.5vh;
+    margin: 0 2em;
   }
 
   .castProfilePic > img {

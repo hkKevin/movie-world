@@ -1,8 +1,5 @@
 #footer {
   grid-column: 2/4;
-  /* margin: 0 2vh; */
-  margin-top: 10em;
-  margin-bottom: 5em;
   margin: 10em 2em 5em 2em;
 
   display: grid;
@@ -12,12 +9,10 @@
 }
 
 #footer a {
-  /* color: #fff; */
   text-decoration: none;
 }
 
 #myName {
-  /* color: #01d277; */
   color: #efe1b1;
 }
 
@@ -26,7 +21,6 @@
 }
 
 #footer i {
-  /* color: #01d277; */
   color: #efe1b1;
 }
 
@@ -35,7 +29,6 @@
 }
 
 #tmdb {
-  /* font-size: 1.7vh; */
   font-size: 0.8em;
 }
 
