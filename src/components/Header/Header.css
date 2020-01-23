@@ -4,9 +4,10 @@
   text-decoration: none;
   color: #efe1b1;
   font-size: 1.8em;
-  margin-bottom: 3vh;
-  /* line-height: 6vh; */
-  line-height: 3vh;
+  /* margin-bottom: 3vh; */
+  margin-bottom: 0.5em;
+  /* line-height: 3vh; */
+  line-height: 1em;
 }
 
 .header a:hover {
