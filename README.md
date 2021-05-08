@@ -1,6 +1,6 @@
 [LIVE DEMO](https://hkkevin.github.io/movie-world)
 
-![Screenshot of Movie World](https://raw.githubusercontent.com/hkKevin/hkKevin.github.io/master/images/projects/movie-world.png)
+![Screenshot of Movie World](https://raw.githubusercontent.com/hkKevin/hkKevin.github.io/master/images/projects/movie-world.webp)
 
 ## Features
 
