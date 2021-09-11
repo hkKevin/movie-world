@@ -1,4 +1,4 @@
-[Live memo](https://hkkevin.github.io/movie-world)
+Live Demo: [https://hkkevin.github.io/movie-world](https://hkkevin.github.io/movie-world)
 
 ![Screenshot of Movie World](https://raw.githubusercontent.com/hkKevin/hkKevin.github.io/master/images/projects/movie-world/movie-world-landing-page.png)
 
