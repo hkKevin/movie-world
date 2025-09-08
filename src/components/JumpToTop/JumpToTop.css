@@ -1,16 +1,20 @@
 #toTop {
-  display: none;
   bottom: 20px;
   right: 20px;
+  position: fixed;
+  right: 20px; 
+  bottom: 20px; 
+  cursor: pointer; 
+  z-index: 10;
 }
 
 .overlayBtn {
   position: fixed;
   z-index: 99;
-  color: #555;
+  color: var(--gray-500);
 }
 
 .overlayBtn:hover {
-  color: #efe1b1;
+  color: var(--primary);
   cursor: pointer;
 }

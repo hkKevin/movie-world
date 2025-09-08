@@ -3,23 +3,92 @@
   height: auto;
 }
 
-#movieInfo {
+.backdropSwiper {
+  margin: 0;
+  overflow: hidden;
+  width: 100vw;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.backdropSwiper .swiper-wrapper {
+  width: 100%;
+}
+
+.backdropSwiper .swiper-button-prev {
+  left: 0;
+}
+
+.backdropSwiper .swiper-button-next {
+  right: 0;
+}
+
+.backdropSwiper .swiper-button-prev,
+.backdropSwiper .swiper-button-next {
+  --swiper-navigation-size: 25px;
+  color: var(--primary);
+  height: 100%;
+  top: 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 0;
+}
+
+.backdropSwiper .swiper-button-prev:hover,
+.backdropSwiper .swiper-button-next:hover {
+  color: #fff;
+}
+
+.backdropSwiper .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Ensure full width */
+  height: auto;
+  overflow: hidden;
+}
+
+.backdropSwiper img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover; /* Optional: makes image fill container nicely */
+  display: block;
+}
+
+.backdropSwiper .swiper-pagination {
+  font-size: 0.7rem;
+}
+
+#movieInfo,
+#reviewInfo {
   grid-column: 2/4;
-  margin: 0 2em;
+  margin: 0 2rem;
 }
 
 #movieIntro {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  align-items: center;
 }
 
 #left {
   text-align: left;
+  padding: 1em 0;
+}
+
+#right {
+  text-align: left;
+  margin-left: 1rem;
+}
+
+#left img {
+  margin-inline: auto;
 }
 
 #movieTitle {
-  font-size: 2em;
-  line-height: 1em;
+  font-size: 2rem;
+  line-height: 1.5;
   margin-top: 0;
   text-align: left;
 }
@@ -27,7 +96,7 @@
 #yearRuntimeRatingHomepage {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  color: gray;
+  color: var(--gray-200);
   margin-top: 1em;
 }
 
@@ -39,12 +108,13 @@
   font-size: 0.7em;
 }
 
-#homepageIcon {
-  color: gray;
+.homepage-link:hover #homepageIcon {
+  color: var(--primary);
 }
 
-#homepageIcon:hover {
-  color: #efe1b1;
+i#homepageIcon {
+  color: var(--gray-200);
+  margin: unset;
 }
 
 #movieDetails {
@@ -52,23 +122,16 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
-#left {
-  padding: 1em 0;
-}
-
-#right {
-  text-align: left;
-}
-
 #budgetRevenueContainer {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-column: 2/4;
-  color: gray;
+  color: var(--gray-200);
+  margin-bottom: 1rem;
 }
 
 #budgetRevenueContainer p {
-  margin-top: 0;
+  margin: 0;
 }
 
 #castContainer {
@@ -88,47 +151,41 @@
   gap: 1em;
 }
 
-#reviewText {
+#reviewInfo {
   text-align: left;
+  margin-top: 4rem;
 }
 
-.accordion__title {
-  color: #0b1434;
-  background: #efe1b1;
-  outline: none;
-  padding: .2em 1em;
-  width: auto;
+#reviewTitle {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
 }
 
-.accordion__title p {
-  margin-top: 0;
+.reviewItem {
+  padding: 1rem 1rem 0 1rem;
+  border: 2px solid var(--gray-300);
+  border-radius: 1rem;
 }
 
-.accordion__title:hover {
-  background: #ebdba1;
+.reviewItem:hover,
+.reviewItem:active {
+  border: 2px solid var(--gray-200);
 }
 
-.accordion__body {
-  text-align: left;
-  border: none;
-  padding: 0 12em;
+.reviewItem:not(last-of-type) {
+  margin-bottom: 2rem;
+}
+
+.reviewItemInfo {
   white-space: pre-wrap;
-  margin-bottom: 3em;
+  color: var(--gray-200);
 }
 
+.reviewContent {
+  white-space: pre-wrap;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
+/* Responsive Styles */
 @media (max-width: 1150px) {
   #videoContainer iframe {
     margin: 1em auto;
@@ -148,7 +205,7 @@
 @media (max-width: 950px) {
   .accordion__body {
     padding: 0 10em;
-  }  
+  }
 }
 
 @media (max-width: 900px) {
@@ -159,6 +216,7 @@
 
   #movieTitle {
     text-align: center;
+    font-size: 1.5rem;
   }
 
   #movieDetails {
@@ -171,35 +229,39 @@
     grid-template-columns: 1fr;
     margin: auto;
   }
+
+  #right {
+    margin-left: 0;
+  }
 }
 
 @media (max-width: 700px) {
   .accordion__body {
     padding: 0 8em;
-  }  
+  }
 }
 
 @media (max-width: 620px) {
   .accordion__body {
     padding: 0 6em;
-  }  
+  }
 }
 
 @media (max-width: 560px) {
-
   #videoContainer iframe {
     margin: 0.5em auto;
     width: 272px;
     height: 153px;
   }
-  
+
   .castProfilePic > img {
     width: 70px;
   }
 
   #budgetRevenueContainer {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
   }
 
   .accordion__body {
@@ -215,13 +277,14 @@
 }
 
 @media (max-width: 450px) {
-
   body {
     font-size: 1.1em;
   }
 
-  #movieInfo {
-    margin: 0 2em;
+  #movieInfo,
+  #reviewInfo {
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
 
   .castProfilePic > img {
@@ -229,8 +292,7 @@
   }
 
   #left img {
-    width: 70%;
+    width: 85%;
     margin: auto;
   }
-
 }

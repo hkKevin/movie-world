@@ -1,18 +1,38 @@
+.header {
+  display: flex;
+}
+
 .header a {
   grid-column: 2/4;
-  font-family: 'Michroma', sans-serif;
+  font-family: "Michroma", sans-serif;
   text-decoration: none;
-  color: #efe1b1;
+  color: var(--primary);
   font-size: 1.8em;
-  margin-bottom: 0.5em;
+  margin: 2rem auto;
   line-height: 1em;
 }
 
-.header a:hover {
-  color: #e5ce80;
+.header a p {
+  font-size: 1.8rem;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 1fr minmax(auto, 36em) minmax(auto, 36em) 1fr;
+.header a:hover {
+  color: var(--primary-dark);
+}
+
+.header p {
+  margin: 0;
+}
+
+@media (max-width: 500px) {
+  .header {
+    margin-inline: 5%;
+  }
+  .header > a {
+    margin: 2rem auto 2rem 0;
+    font-size: 1.3rem;
+  }
+  .header a p {
+    font-size: 1.3rem;
+  }
 }

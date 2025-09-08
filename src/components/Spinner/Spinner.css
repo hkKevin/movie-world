@@ -13,20 +13,22 @@
   height: 3em;
   margin: 1em auto;  
 }
+
 .Spinner {
   font-size: 1em;
   position: relative;
   text-indent: -9999em;
-  border-top: .2em solid #efe1b1;
-  border-right: .2em solid #efe1b1;
-  border-bottom: .2em solid #efe1b1;
-  border-left: .2em solid #0b1434;
+  border-top: .2em solid var(--primary);
+  border-right: .2em solid var(--primary);
+  border-bottom: .2em solid var(--primary);
+  border-left: .2em solid var(--bg-primary);
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);
   -webkit-animation: spinning 1.5s infinite linear;
   animation: spinning 1.5s infinite linear;
 }
+
 @-webkit-keyframes spinning {
   0% {
     -webkit-transform: rotate(0deg);

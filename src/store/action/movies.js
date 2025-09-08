@@ -14,9 +14,9 @@ let hasResult = false;
 let searchFinished = false;
 let totalResults = 0;
 let totalPages = 0;
-let currentPage = 0;
+let currentPage = 1;
 
-export const searchMovies = (searchText) => {
+export const searchMovies = (searchText, abortSignal) => {
 
   return dispatch => {
     // Return when user enter nothing
@@ -31,28 +31,28 @@ export const searchMovies = (searchText) => {
     }
 
     axios.get('https://api.themoviedb.org/3/search/movie?api_key=34af8294dab051e0d2dc34894beac01c&language=en-US&query='
-    + searchText + '&page=1&include_adult=false')
+    + searchText + '&page=' + currentPage + '&include_adult=false', {
+      signal: abortSignal
+    })
     .then(response => {
       fetchedMovies = [];
-      // dispatch(searchMoviesSuccess(fetchedMovies));
       for (let key in response.data.results) {
-        fetchedMovies.push(response.data.results[key])
+        if (response.data.results[key].vote_count > 50) { // Try to prevent showing unpopular movies
+          fetchedMovies.push(response.data.results[key])
+        }
       }
-      // console.log(fetchedMovies);
       if (fetchedMovies.length === 0) {
         hasResult = false;
-        dispatch(searchMoviesSuccess(fetchedMovies, hasResult, searchText));
+        searchFinished = true;
+        dispatch(searchMoviesSuccess(fetchedMovies, hasResult, searchText, searchFinished));
       } else {
         hasResult = true;
         totalResults = response.data.total_results;
         totalPages = response.data.total_pages;
         currentPage = response.data.page;
-        // const searchFinished = true;
         searchFinished = true;
         dispatch(searchMoviesSuccess(fetchedMovies, hasResult, searchText , totalResults, totalPages, currentPage, searchFinished));
       }
-      // console.log(response.data.total_results);
-      // console.log(response.data.total_pages);
     })
     .catch(error => {
       console.error(error);
@@ -104,9 +104,8 @@ export const selectMovie = (movieId) => {
 
     async function getMovieDetails() {
       try {
-        const details = await axios.get('https://api.themoviedb.org/3/movie/' + movieId + '?api_key=34af8294dab051e0d2dc34894beac01c&language=en-US&append_to_response=images&include_image_language=en,null');
+        const details = await axios.get('https://api.themoviedb.org/3/movie/' + movieId + '?api_key=34af8294dab051e0d2dc34894beac01c&include_adult=false&language=en-US&append_to_response=images&include_image_language=en,null');
         dispatch(selectMovieSuccess(details.data));
-        // console.log(details.data);
       } catch (error) {
         console.error(error);
       }
@@ -116,7 +115,6 @@ export const selectMovie = (movieId) => {
       try {
         const credits = await axios.get('https://api.themoviedb.org/3/movie/' + movieId + '/credits?api_key=34af8294dab051e0d2dc34894beac01c');
         dispatch(getCreditsSuccess(credits.data));
-        // console.log(credits.data);
       } catch (error) {
         console.error(error);
       }
@@ -126,7 +124,6 @@ export const selectMovie = (movieId) => {
       try {
         const videos = await axios.get('https://api.themoviedb.org/3/movie/' + movieId + '/videos?api_key=34af8294dab051e0d2dc34894beac01c&language=en-US');
         dispatch(getVideosSuccess(videos.data));
-        // console.log(videos.data);
       } catch (error) {
         console.error(error);
       }
@@ -136,7 +133,6 @@ export const selectMovie = (movieId) => {
       try {
         const reviews = await axios.get('https://api.themoviedb.org/3/movie/' + movieId + '/reviews?api_key=34af8294dab051e0d2dc34894beac01c&language=en-US&page=1');
         dispatch(getReviewsSuccess(reviews.data));
-        // console.log(reviews.data);
       } catch (error) {
         console.error(error);
       }
@@ -201,11 +197,12 @@ export const selectPage = (page, searchText) => {
     axios.get('https://api.themoviedb.org/3/search/movie?api_key=34af8294dab051e0d2dc34894beac01c&language=en-US&query='
       + searchText + '&page=' + page + '&include_adult=false')
       .then(response => {
-        // console.log(response.data.results)
         for (let key in response.data.results) {
-          fetchedMovies.push(response.data.results[key])
+          if (response.data.results[key].vote_count > 50) { // Try to prevent showing unpopular movies
+            fetchedMovies.push(response.data.results[key])
+          }
         }
-        // console.log(fetchedMovies)
+        
         currentPage = response.data.page;
         dispatch(selectPageSuccess(fetchedMovies, currentPage));
         hasResult = true;

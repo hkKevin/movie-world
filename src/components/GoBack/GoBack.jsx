@@ -1,15 +1,12 @@
-import React, { useEffect } from 'react';
+// import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ReactTooltip from 'react-tooltip';
+import { Tooltip } from 'react-tooltip';
 
 import './GoBack.css';
 
 const GoBack = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    ReactTooltip.rebuild();
-  });
 
   const goBackClicked = () => {
     navigate(-1); // equivalent to history.goBack()
@@ -17,13 +14,17 @@ const GoBack = () => {
 
   return (
     <div>
-      <ReactTooltip effect="solid" className="tooltip" type="light" />
+      <Tooltip id='jump-tooltip' className="tooltip" positionStrategy='fixed' />
       <i
         id="goBack"
         onClick={goBackClicked}
-        style={{ left: '20px', bottom: '20px' }}
         className="fas fa-arrow-circle-left fa-2x overlayBtn"
-        data-tip="BACK"
+        data-tooltip-id='api-tooltip'
+        data-tooltip-content='Back'
+        data-tooltip-place='bottom'
+        data-tooltip-delay-hide={100}
+        data-tooltip-variant='light'
+        data-tooltip-position-strategy = 'fixed'
       ></i>
     </div>
   );

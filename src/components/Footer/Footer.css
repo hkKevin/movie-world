@@ -5,7 +5,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 15em;
-  color: gray;
+  color: var(--gray-100);
 }
 
 #footer a {
@@ -13,7 +13,7 @@
 }
 
 #myName {
-  color: #efe1b1;
+  color: var(--primary);
 }
 
 #myName:hover {
@@ -21,7 +21,7 @@
 }
 
 #footer i {
-  color: #efe1b1;
+  color: var(--primary);
 }
 
 #footer i:hover {
@@ -46,6 +46,6 @@
 
   #myself {
     padding-top: 2.5em;
-    border-top: 1px solid #333;
+    border-top: 1px solid var(--gray-300);
   }
 }

@@ -5,8 +5,8 @@ import './Header.css';
 
 const header = () => {
   return (
-    <header className='grid header'>
-      <Link to='/'><p>Movie World</p></Link>
+    <header className='header'>
+      <Link to='/movie-world/'><p>Movie World</p></Link>
     </header>
   );
 }
