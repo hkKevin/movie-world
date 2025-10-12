@@ -48,7 +48,7 @@ const Movies = () => {
       //                              .replace(/\s+/g, '-')        // Spaces → hyphens
       //                              .replace(/-+/g, '-')         // Multiple hyphens → single
       //                              .replace(/^-+|-+$/g, '');    // Remove leading/trailing hyphens
-      console.log('movieSlug', movieSlug)
+      // console.log('movieSlug', movieSlug)
       // console.log("movieId", movieId);
       dispatch(actions.selectMovie(movieId));
       navigate(`/movie-world/movie/${movieId}/${movieSlug}`);

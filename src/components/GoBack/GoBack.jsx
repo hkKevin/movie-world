@@ -9,7 +9,8 @@ const GoBack = () => {
 
 
   const goBackClicked = () => {
-    navigate(-1); // equivalent to history.goBack()
+    //navigate(-1); // equivalent to history.goBack()
+      navigate(`/movie-world/`);
   };
 
   return (

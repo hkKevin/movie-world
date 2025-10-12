@@ -94,7 +94,15 @@ const Movie = () => {
         title={video.name}
         width="544"
         height="306"
-        src={`https://www.youtube-nocookie.com/embed/${video.key}?loading=lazy`}
+        // src={`https://www.youtube-nocookie.com/embed/${video.key}?loading=lazy`}
+        src={`https://www.youtube-nocookie.com/embed/${video.key}?loading=lazy` + 
+              `rel=0` +           // Don't show related videos
+              `&modestbranding=1` + // Remove YouTube logo
+              `&controls=1` +     // Show controls (0 to hide)
+              `&showinfo=0` +     // Hide video info
+              `&fs=1` +           // Allow fullscreen
+              `&enablejsapi=0`   // Disable JS API (reduces tracking)
+            }
         frameBorder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
