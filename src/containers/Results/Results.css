@@ -3,7 +3,6 @@
   grid-template-columns: repeat(5, 1fr);
   gap: 1em;
   grid-column: 2/4;
-  margin: 1rem 0;
 }
 
 #intro-text {
@@ -61,7 +60,7 @@
 @media (max-width: 500px) {
   #intro-text {
     text-align: left;
-    margin-inline: 5%;
+    margin-left: 5%;
   }
 }
 

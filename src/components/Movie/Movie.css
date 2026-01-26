@@ -87,7 +87,6 @@
 }
 
 #movieTitle {
-  color: var(--gray-100);
   font-size: 2rem;
   line-height: 1.5;
   margin-top: 0;
@@ -155,7 +154,6 @@ i#homepageIcon {
 #reviewInfo {
   text-align: left;
   margin-top: 4rem;
-  overflow: auto;
 }
 
 #reviewTitle {
@@ -184,9 +182,7 @@ i#homepageIcon {
 }
 
 .reviewContent {
-  color: var(--gray-100);
   white-space: pre-wrap;
-  overflow: auto;
 }
 
 /* Responsive Styles */

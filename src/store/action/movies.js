@@ -37,12 +37,14 @@ export const searchMovies = (searchText, abortSignal) => {
     .then(response => {
       fetchedMovies = [];
       for (let key in response.data.results) {
-        fetchedMovies.push(response.data.results[key])
+        if (response.data.results[key].vote_count > 50) { // Try to prevent showing unpopular movies
+          fetchedMovies.push(response.data.results[key])
+        }
       }
       if (fetchedMovies.length === 0) {
         hasResult = false;
         searchFinished = true;
-        dispatch(searchMoviesFail(fetchedMovies, hasResult, searchFinished, totalResults, searchText));
+        dispatch(searchMoviesSuccess(fetchedMovies, hasResult, searchText, searchFinished));
       } else {
         hasResult = true;
         totalResults = response.data.total_results;
@@ -54,7 +56,6 @@ export const searchMovies = (searchText, abortSignal) => {
     })
     .catch(error => {
       console.error(error);
-      dispatch(searchMoviesFail(fetchedMovies, hasResult, searchFinished, totalResults, searchText));
     })
   };
 };
@@ -197,23 +198,16 @@ export const selectPage = (page, searchText) => {
       + searchText + '&page=' + page + '&include_adult=false')
       .then(response => {
         for (let key in response.data.results) {
-          fetchedMovies.push(response.data.results[key])
+          if (response.data.results[key].vote_count > 50) { // Try to prevent showing unpopular movies
+            fetchedMovies.push(response.data.results[key])
+          }
         }
-
-        if (fetchedMovies.length === 0) {
-          hasResult = false;
-          searchFinished = true;
-          totalResults = 0;
-          totalPages = 0;
-          currentPage = 1
-          dispatch(selectPageFail(fetchedMovies, currentPage));
-        } else {
-          currentPage = response.data.page;
-          dispatch(selectPageSuccess(fetchedMovies, currentPage));
-          hasResult = true;
-          totalResults = response.data.total_results;
-          totalPages = response.data.total_pages;
-        }
+        
+        currentPage = response.data.page;
+        dispatch(selectPageSuccess(fetchedMovies, currentPage));
+        hasResult = true;
+        totalResults = response.data.total_results;
+        totalPages = response.data.total_pages;
       })
       .catch(error => {
         console.error(error);

@@ -32,6 +32,7 @@ const Movies = () => {
     window.scrollTo(0, 0);
   }, []);
 
+
   const onPageChange = (page) => {
     dispatch(actions.selectPage(page, searchText));
   };
@@ -51,17 +52,6 @@ const Movies = () => {
       // console.log("movieId", movieId);
       dispatch(actions.selectMovie(movieId));
       navigate(`/movie-world/movie/${movieId}/${movieSlug}`);
-    }
-  };
-
-  const keyClicked = (movieId, movieTitle, event) => {
-    if (event.key === "Enter" || event.key === ' ') {
-      event.preventDefault()
-      if (movieId) {
-        const movieSlug = createSlug(movieTitle)
-        dispatch(actions.selectMovie(movieId));
-        navigate(`/movie-world/movie/${movieId}/${movieSlug}`);
-      }
     }
   };
 
@@ -102,49 +92,31 @@ const Movies = () => {
               ?.map((movie) => (
                 <Fade key={movie.id}>
                   <div className="movie">
-                    {movie.vote_count <= 50 ? ( // Prevent showing the details of inappropriate movies
-                      <img
-                        src={imgNotFoundSrc + movie.title}
-                        alt={`Poster of "${movie.title}" unavailable`}
-                        loading="lazy"
-                        style={{cursor: "not-allowed"}}
-                        data-tooltip-id="img-tooltip"
-                        data-tooltip-content="Movie unavailable"
-                        data-tooltip-place="top"
-                        data-tooltip-delay-hide={100}
-                        data-tooltip-variant="light"
-                      />
-                    ) :movie.poster_path ? (
+                    {movie.poster_path ? (
                       <img
                         onClick={() => movieClicked(movie.id, movie.title)}
-                        onKeyDown={e => keyClicked(movie.id, movie.title, e)}
                         src={imgSrc + movie.poster_path}
                         alt={`Poster of "${movie.title}"`}
                         loading="lazy"
-                        role="button"
-                        tabIndex={0}
                         data-tooltip-id="img-tooltip"
                         data-tooltip-content={movie.title}
                         data-tooltip-place="top"
                         data-tooltip-delay-hide={100}
                         data-tooltip-variant="light"
                       />
-                    ) : !movie.poster_path ? (
+                    ) : (
                       <img
                         onClick={() => movieClicked(movie.id, movie.title)}
-                        onKeyDown={e => keyClicked(movie.id, movie.title, e)}
                         src={imgNotFoundSrc + movie.title}
                         alt={`Poster of "${movie.title}" not found`}
                         loading="lazy"
-                        role="button"
-                        tabIndex={0}
                         data-tooltip-id="img-tooltip"
                         data-tooltip-content={movie.title}
                         data-tooltip-place="top"
                         data-tooltip-delay-hide={100}
                         data-tooltip-variant="light"
                       />
-                    ) :  null}
+                    )}
                   </div>
                 </Fade>
               ))}
@@ -170,6 +142,7 @@ const Movies = () => {
       <Header />
       {introText}
       <Search />
+      {resultsPagination}
       {searchResults}
       {hasResultOrNot}
       {resultsPagination}
