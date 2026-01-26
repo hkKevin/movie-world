@@ -10,6 +10,7 @@ const Search = () => {
   const searchText = useSelector((state) => state.searchText);
   const dispatch = useDispatch();
   const abortControllerRef = useRef(null);
+  const searchInputRef = useRef(null);
   // const [searchTerm, setSearchTerm] = useState('')
   const [searchTerm, setSearchTerm] = useState(searchText)
 
@@ -20,6 +21,20 @@ const Search = () => {
   //     input.value = searchText;
   //   }
   // }, [searchText]);
+
+  useEffect(() => {
+    const handleKeyPress = event => {
+      if (event.key === '/') {
+        event.preventDefault()
+        searchInputRef.current?.focus()
+      }
+    }
+    window.addEventListener('keypress', handleKeyPress)
+
+    return () => {
+      window.removeEventListener('keypress', handleKeyPress)
+    }
+  }, [])
 
   useEffect(() => {
     // Prevent fetching movie results when navigating back from the movie page
@@ -71,9 +86,10 @@ const Search = () => {
               key='movieSearch'
               name="searchBox"
               type="search"
+              ref={searchInputRef}
               onChange={(e) => setSearchTerm(e.target.value)}
               value={searchTerm}
-              placeholder="Enter movie name"
+              placeholder="Enter movie name (Hit / to focus)"
               autoFocus
             />
             {searchText && (

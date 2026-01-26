@@ -1,13 +1,26 @@
-// import React, { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Tooltip } from 'react-tooltip';
 
 import './GoBack.css';
 
 const GoBack = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  
+  useEffect(() => {
+    const handleKeyPress = event => {
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        goBackClicked()
+      }
+    }
+    window.addEventListener('keydown', handleKeyPress)
 
-
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress)
+    }
+  }, [])
+  
   const goBackClicked = () => {
     //navigate(-1); // equivalent to history.goBack()
       navigate(`/movie-world/`);
