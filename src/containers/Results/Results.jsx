@@ -50,7 +50,7 @@ const Movies = () => {
       // console.log('movieSlug', movieSlug)
       // console.log("movieId", movieId);
       dispatch(actions.selectMovie(movieId));
-      navigate(`/movie-world/movie/${movieId}/${movieSlug}`);
+      navigate(`/movie/${movieId}/${movieSlug}`);
     }
   };
 
@@ -60,7 +60,7 @@ const Movies = () => {
       if (movieId) {
         const movieSlug = createSlug(movieTitle)
         dispatch(actions.selectMovie(movieId));
-        navigate(`/movie-world/movie/${movieId}/${movieSlug}`);
+        navigate(`/movie/${movieId}/${movieSlug}`);
       }
     }
   };

@@ -9,9 +9,7 @@ export default defineConfig(({ mode }) => ({
   build: {
     outDir: 'dist',
   },
-  base: '/movie-world/',
-  // base: '/movie-world',
-  // base: mode === 'production' ? '/movie-world/' : '/movie-world',
+  base: mode === 'production' ? '/movie-world/' : '/',
   server: {
     port: 3000,
     // middlewareMode: false,
