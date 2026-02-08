@@ -9,7 +9,7 @@ import { selectMovieData } from '../movieSelector';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { Navigation, Pagination, Mousewheel, Keyboard, FreeMode } from 'swiper/modules';
+import { Navigation, Pagination, Mousewheel, Keyboard, Autoplay, A11y } from 'swiper/modules';
 
 import { Tooltip } from 'react-tooltip';
 import { Fade } from "react-awesome-reveal";
@@ -78,6 +78,7 @@ const Movie = () => {
         <img 
           src={profileSrc + c.profile_path} 
           alt={`Photo of ${c.name}`} 
+          tabindex="0" 
           data-tooltip-id='actor-tooltip' 
           data-tooltip-content={c.name} 
           data-tooltip-place='top'
@@ -107,6 +108,8 @@ const Movie = () => {
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
         loading="lazy"
+        role="button" 
+        tabindex="0"
       />
     </Fade>
   ));
@@ -201,13 +204,23 @@ const Movie = () => {
           <Swiper
             cssMode={true}
             navigation={true}
+            autoplay={{
+              delay: 3000,
+              pauseOnMouseEnter: true,
+              disableOnInteraction: false, // Prevents autoplay from stopping after user swipes
+            }}
             pagination={{
               type: 'fraction',
+            }}
+            a11y={{
+              containerMessage: 'Movie Backdrop Carousel',
+              containerRoleDescriptionMessage: 'Carousel',
+              itemRoleDescriptionMessage: 'Movie Backdrop',
             }}
             loop={true}
             mousewheel={true}
             keyboard={true}
-            modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+            modules={[Navigation, Pagination, Mousewheel, Keyboard, Autoplay, A11y]}
             grabCursor
             className="backdropSwiper"
           >
@@ -224,7 +237,7 @@ const Movie = () => {
             : null}
           {reviews?.results.map(review =>
             review?.content && (
-                <div className='reviewItem' key={review.id}>
+                <div className='reviewItem' key={review.id} tabIndex="0">
                   <div className='reviewItemInfo'>{`${review.author}   •   ${new Date(review.created_at).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" })}`}</div>
                   <p className='reviewContent'>{review.content}</p>
                 </div>

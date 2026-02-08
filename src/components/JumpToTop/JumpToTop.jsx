@@ -51,6 +51,8 @@ const JumpToTop = () => {
         ref={jumpRef}
         className="fas fa-chevron-circle-up fa-2x overlayBtn"
         onClick={toTopClicked}
+        role="button"
+        tabIndex="0"
         data-tooltip-id='jump-tooltip'
         data-tooltip-content='Top'
         data-tooltip-place='top'
