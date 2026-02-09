@@ -18,7 +18,7 @@
   border: none;
   outline: none;
   background: #fff;
-  color: var(--gray-400);
+  color: var(--gray-500);
 }
 
 .search-wrapper [type='button'] {
@@ -31,7 +31,7 @@
   font-size: 1rem;
   cursor: pointer;
   padding: 0 .5rem;
-  color: var(--gray-500);
+  color: var(--gray-300);
 }
 
 @media (max-width: 700px) {
