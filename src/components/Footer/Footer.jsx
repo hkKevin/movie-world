@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+// import React, { useEffect } from 'react';
 // import ReactTooltip from 'react-tooltip';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
@@ -20,9 +20,9 @@ const Footer = () => {
         <div id='tmdb'>
           <a href='https://www.themoviedb.org/' target='_blank' rel='noopener noreferrer'>
             <img
-              src='https://www.themoviedb.org/assets/1/v4/logos/408x161-powered-by-rectangle-green-bb4301c10ddc749b4e79463811a68afebeae66ef43d17bcfd8ff0e60ded7ce99.png'
+              src='https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg'
               alt='Logo of The Movie DataBase'
-              width='100'
+              width='40'
               data-tooltip-id='api-tooltip'
               data-tooltip-content='The Movie DataBase'
               data-tooltip-place='top'
@@ -30,7 +30,7 @@ const Footer = () => {
               data-tooltip-variant='light'
             />
           </a>
-          <p>This product uses the TMDb API but is not endorsed or certified by TMDb.</p>
+          <p>This application uses the TMDb API but is not endorsed or certified by TMDb.</p>
         </div>
         <div id='myself'>
           <Fade bottom triggerOnce>

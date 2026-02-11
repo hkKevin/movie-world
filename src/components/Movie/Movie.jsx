@@ -78,7 +78,7 @@ const Movie = () => {
         <img 
           src={profileSrc + c.profile_path} 
           alt={`Photo of ${c.name}`} 
-          tabindex="0" 
+          tabIndex="0" 
           data-tooltip-id='actor-tooltip' 
           data-tooltip-content={c.name} 
           data-tooltip-place='top'
@@ -109,7 +109,7 @@ const Movie = () => {
         allowFullScreen
         loading="lazy"
         role="button" 
-        tabindex="0"
+        tabIndex="0"
       />
     </Fade>
   ));

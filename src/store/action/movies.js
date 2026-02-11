@@ -9,6 +9,9 @@ import axios from 'axios';
 //   };
 // }
 
+const API_KEY = import.meta.env.VITE_API_KEY;
+const BASE_URL = import.meta.env.VITE_API_BASE;
+
 let fetchedMovies = [];
 let hasResult = false;
 let searchFinished = false;
@@ -30,7 +33,7 @@ export const searchMovies = (searchText, abortSignal) => {
       return;
     }
 
-    axios.get('https://api.themoviedb.org/3/search/movie?api_key=34af8294dab051e0d2dc34894beac01c&language=en-US&query='
+    axios.get(`${BASE_URL}/3/search/movie?api_key=${API_KEY}&language=en-US&query=`
     + searchText + '&page=' + currentPage + '&include_adult=false', {
       signal: abortSignal
     })
@@ -103,7 +106,7 @@ export const selectMovie = (movieId) => {
 
     async function getMovieDetails() {
       try {
-        const details = await axios.get('https://api.themoviedb.org/3/movie/' + movieId + '?api_key=34af8294dab051e0d2dc34894beac01c&include_adult=false&language=en-US&append_to_response=images&include_image_language=en,null');
+        const details = await axios.get(`${BASE_URL}/3/movie/${movieId}?api_key=${API_KEY}&include_adult=false&language=en-US&append_to_response=images&include_image_language=en,null`);
         dispatch(selectMovieSuccess(details.data));
       } catch (error) {
         console.error(error);
@@ -112,7 +115,7 @@ export const selectMovie = (movieId) => {
 
     async function getMovieCredits() {
       try {
-        const credits = await axios.get('https://api.themoviedb.org/3/movie/' + movieId + '/credits?api_key=34af8294dab051e0d2dc34894beac01c');
+        const credits = await axios.get(`${BASE_URL}/3/movie/${movieId}/credits?api_key=${API_KEY}`);
         dispatch(getCreditsSuccess(credits.data));
       } catch (error) {
         console.error(error);
@@ -121,7 +124,7 @@ export const selectMovie = (movieId) => {
 
     async function getVideos() {
       try {
-        const videos = await axios.get('https://api.themoviedb.org/3/movie/' + movieId + '/videos?api_key=34af8294dab051e0d2dc34894beac01c&language=en-US');
+        const videos = await axios.get(`${BASE_URL}/3/movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`);
         dispatch(getVideosSuccess(videos.data));
       } catch (error) {
         console.error(error);
@@ -130,7 +133,7 @@ export const selectMovie = (movieId) => {
 
     async function getMovieReviews() {
       try {
-        const reviews = await axios.get('https://api.themoviedb.org/3/movie/' + movieId + '/reviews?api_key=34af8294dab051e0d2dc34894beac01c&language=en-US&page=1');
+        const reviews = await axios.get(`${BASE_URL}/3/movie/${movieId}/reviews?api_key=${API_KEY}&language=en-US&page=1`);
         dispatch(getReviewsSuccess(reviews.data));
       } catch (error) {
         console.error(error);
@@ -193,7 +196,7 @@ export const selectPage = (page, searchText) => {
     hasResult = false;
     totalResults = 0;
     totalPages = 0;
-    axios.get('https://api.themoviedb.org/3/search/movie?api_key=34af8294dab051e0d2dc34894beac01c&language=en-US&query='
+    axios.get(`${BASE_URL}/3/search/movie?api_key=${API_KEY}&language=en-US&query=`
       + searchText + '&page=' + page + '&include_adult=false')
       .then(response => {
         for (let key in response.data.results) {

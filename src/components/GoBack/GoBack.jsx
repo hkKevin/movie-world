@@ -34,7 +34,7 @@ const GoBack = () => {
         onClick={goBackClicked}
         className="fas fa-arrow-circle-left fa-2x overlayBtn"
         role="button" 
-        tabindex="0" 
+        tabIndex="0" 
         data-tooltip-id='api-tooltip'
         data-tooltip-content='Back'
         data-tooltip-place='bottom'
