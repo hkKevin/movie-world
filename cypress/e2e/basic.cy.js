@@ -53,6 +53,8 @@
 describe('Basic test on production env', () => {
   beforeEach(() => {
     cy.viewport(393, 852) // iPhone 15, 15 Pro
+  })
+  before(() => {
     cy.visit('https://hkkevin.github.io/movie-world/#/')
   })
 
@@ -62,38 +64,46 @@ describe('Basic test on production env', () => {
       .should('be.focused')
       .invoke('attr', 'placeholder')
       .should('include', 'Enter movie name')
-    })
+    cy.wait(1000)
+  })
 
   it('Searching Harry Potter', () => {
+    // Ensure we're on the homepage
+    cy.hash().should('eq', '#/')
+
     cy.get('#searchBox')
       .type('Harry Potter', { delay: 100 }) // 100ms between each keystroke
-    cy.wait(1000)
+    cy.wait(2000)
     cy.get('img[data-tooltip-content="Harry Potter and the Philosopher\'s Stone"]')
       .should('be.visible')
       .click()
-    cy.wait(2000)
-    //cy.url() gets the full URL and has built-in retry logic
+      //cy.url() gets the full URL and has built-in retry logic
     cy.url().should('include', 'movie/671/harry-potter-and-the-philosophers-stone')
+    cy.wait(1000)
     cy.get('#goBack').click()
     cy.hash().should('eq', '#/')
+    // Clear search field
+    cy.wait(1000)
+    cy.get('button[data-tooltip-id="clear-tooltip"]').click()
   })
 
   it('Searching Star Wars', () => {
     cy.get('#searchBox')
       .type('Star Wars', { delay: 100 })
+    cy.wait(2000)
 
     // View movie details page
     cy.get('img[data-tooltip-content="Star Wars: The Force Awakens"]')
       .should('be.visible')
       .click()
-    cy.wait(2000)
+      
     // cy.hash() gets just the hash portion (everything after #):
     cy.hash().should('eq', '#/movie/140607/star-wars-the-force-awakens')
     cy.get('#movieTitle').contains('Star Wars: The Force Awakens')
     cy.get('#searchBox').should('not.exist')
 
     // Go back to homepage
-    // cy.wait(2000)
+    cy.wait(1000)
     cy.get('#goBack').click()
     cy.hash().should('eq', '#/')
     cy.get('#searchBox')
