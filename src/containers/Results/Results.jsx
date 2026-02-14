@@ -10,7 +10,7 @@ import Header from "../../components/Header/Header";
 import Search from "../Search/Search";
 import Footer from "../../components/Footer/Footer";
 import JumpToTop from "../../components/JumpToTop/JumpToTop";
-import ResultsPagination from "../../components/ResultsPagination/ResultsPagination";
+// import ResultsPagination from "../../components/ResultsPagination/ResultsPagination";
 import Spinner from "../../components/Spinner/Spinner";
 import { useNavigate } from "react-router-dom";
 import { createSlug } from "../../utils/slugify";
@@ -23,8 +23,8 @@ const Movies = () => {
     movies,
     hasResult,
     searchText,
-    totalPages,
-    currentPage,
+    // totalPages,
+    // currentPage,
     loading,
   } = useSelector(selectMoviesData);
 
@@ -32,9 +32,9 @@ const Movies = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const onPageChange = (page) => {
-    dispatch(actions.selectPage(page, searchText));
-  };
+  // const onPageChange = (page) => {
+  //   dispatch(actions.selectPage(page, searchText));
+  // };
 
   const movieClicked = (movieId, movieTitle) => {
     if (movieId) {
@@ -72,7 +72,7 @@ const Movies = () => {
   let introText = null;
   let hasResultOrNot = null;
   let searchResults = null;
-  let resultsPagination = null;
+  // let resultsPagination = null;
 
   if (!searchText && !hasResult) {
     introText = (
@@ -154,15 +154,15 @@ const Movies = () => {
     }
   }
 
-  if (movies?.length > 0 && hasResult && !loading) {
-    resultsPagination = (
-      <ResultsPagination
-        onChange={onPageChange}
-        currentPage={currentPage}
-        totalPages={totalPages > 1000 ? 1000 : totalPages}
-      />
-    );
-  }
+  // if (movies?.length > 0 && hasResult && !loading) {
+  //   resultsPagination = (
+  //     <ResultsPagination
+  //       onChange={onPageChange}
+  //       currentPage={currentPage}
+  //       totalPages={totalPages > 1000 ? 1000 : totalPages}
+  //     />
+  //   );
+  // }
 
   return (
     <div>
@@ -172,7 +172,7 @@ const Movies = () => {
       <Search />
       {searchResults}
       {hasResultOrNot}
-      {resultsPagination}
+      {/* {resultsPagination} */}
       <JumpToTop />
       <Footer />
     </div>

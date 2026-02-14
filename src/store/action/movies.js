@@ -2,13 +2,6 @@ import axios from 'axios';
 
 // Action Creators:
 
-// export const storeSearchText = (searchText) => {
-//   return {
-//     type: 'STORE_SEARCH_TEXT',
-//     searchText: searchText
-//   };
-// }
-
 const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = import.meta.env.VITE_API_BASE;
 
@@ -21,7 +14,7 @@ let currentPage = 1;
 
 export const searchMovies = (searchText, abortSignal) => {
 
-  return dispatch => {
+  return async dispatch => {
     // Return when user enter nothing
     dispatch(searchMoviesStart());
     if (searchText === null || searchText === '') {
@@ -33,34 +26,99 @@ export const searchMovies = (searchText, abortSignal) => {
       return;
     }
 
-    axios.get(`${BASE_URL}/3/search/movie?api_key=${API_KEY}&language=en-US&query=`
-    + searchText + '&page=' + currentPage + '&include_adult=false', {
-      signal: abortSignal
-    })
-    .then(response => {
-      fetchedMovies = [];
-      for (let key in response.data.results) {
-        fetchedMovies.push(response.data.results[key])
-      }
+    try {
+      const pages = [1, 2, 3]
+      const requests = pages.map(page => 
+        axios.get(
+          `${BASE_URL}/3/search/movie?api_key=${API_KEY}&language=en-US&query=${searchText}&page=${page}&include_adult=false`,
+          { signal: abortSignal }
+        )
+      );
+      
+      let responses = await Promise.all(requests);
+      const allResults = responses.flatMap(r => r.data.results);
+      const filtered = allResults
+        .filter(movie => 
+          movie.popularity >= 5 && 
+          movie.vote_count >= 50
+        )
+        .sort((a, b) => b.popularity - a.popularity)
+
+      // Remove duplicated movie
+      const fetchedMovies = Array.from(new Map(filtered.map(film => [film.id, film])).values())
+
       if (fetchedMovies.length === 0) {
         hasResult = false;
         searchFinished = true;
+        const totalResults = 0;
         dispatch(searchMoviesFail(fetchedMovies, hasResult, searchFinished, totalResults, searchText));
       } else {
         hasResult = true;
-        totalResults = response.data.total_results;
-        totalPages = response.data.total_pages;
-        currentPage = response.data.page;
+        totalResults = fetchedMovies.length;
+        totalPages = filtered.total_pages;
+        currentPage = filtered.page;
         searchFinished = true;
-        dispatch(searchMoviesSuccess(fetchedMovies, hasResult, searchText , totalResults, totalPages, currentPage, searchFinished));
+        dispatch(searchMoviesSuccess(fetchedMovies, hasResult, searchText, totalResults, totalPages, currentPage, searchFinished));
       }
-    })
-    .catch(error => {
-      console.error(error);
+      
+    } catch (error) {
+      if (axios.isCancel(error)) {
+        console.log('Search canceled:', error.message);
+        // Don't dispatch error for canceled requests
+        return;
+      }
+      console.error('Unexpected error:', error.message);
+      const fetchedMovies = [];
+      const hasResult = false;
+      const searchFinished = true;
+      const totalResults = 0;
       dispatch(searchMoviesFail(fetchedMovies, hasResult, searchFinished, totalResults, searchText));
-    })
+    }
   };
 };
+
+// export const searchMovies = (searchText, abortSignal) => {
+
+//   return dispatch => {
+//     // Return when user enter nothing
+//     dispatch(searchMoviesStart());
+//     if (searchText === null || searchText === '') {
+//       fetchedMovies = [];
+//       hasResult = false;
+//       searchFinished = true;
+//       totalResults = 0;
+//       dispatch(searchMoviesFail(fetchedMovies, hasResult, searchFinished, totalResults, searchText));
+//       return;
+//     }
+
+//     axios.get(`${BASE_URL}/3/search/movie?api_key=${API_KEY}&language=en-US&query=`
+//     + searchText + '&page=' + currentPage + '&include_adult=false', {
+//       signal: abortSignal
+//     })
+//     .then(response => {
+//       fetchedMovies = [];
+//       for (let key in response.data.results) {
+//         fetchedMovies.push(response.data.results[key])
+//       }
+//       if (fetchedMovies.length === 0) {
+//         hasResult = false;
+//         searchFinished = true;
+//         dispatch(searchMoviesFail(fetchedMovies, hasResult, searchFinished, totalResults, searchText));
+//       } else {
+//         hasResult = true;
+//         totalResults = response.data.total_results;
+//         totalPages = response.data.total_pages;
+//         currentPage = response.data.page;
+//         searchFinished = true;
+//         dispatch(searchMoviesSuccess(fetchedMovies, hasResult, searchText , totalResults, totalPages, currentPage, searchFinished));
+//       }
+//     })
+//     .catch(error => {
+//       console.error(error);
+//       dispatch(searchMoviesFail(fetchedMovies, hasResult, searchFinished, totalResults, searchText));
+//     })
+//   };
+// };
 
 export const searchMoviesStart = () => {
   return {
@@ -189,59 +247,59 @@ export const getReviewsSuccess = (reviews) => {
 };
 
 
-export const selectPage = (page, searchText) => {
-  return dispatch => {
-    dispatch(selectPageStart());
-    fetchedMovies = [];
-    hasResult = false;
-    totalResults = 0;
-    totalPages = 0;
-    axios.get(`${BASE_URL}/3/search/movie?api_key=${API_KEY}&language=en-US&query=`
-      + searchText + '&page=' + page + '&include_adult=false')
-      .then(response => {
-        for (let key in response.data.results) {
-          fetchedMovies.push(response.data.results[key])
-        }
+// export const selectPage = (page, searchText) => {
+//   return dispatch => {
+//     dispatch(selectPageStart());
+//     fetchedMovies = [];
+//     hasResult = false;
+//     totalResults = 0;
+//     totalPages = 0;
+//     axios.get(`${BASE_URL}/3/search/movie?api_key=${API_KEY}&language=en-US&query=`
+//       + searchText + '&page=' + page + '&include_adult=false')
+//       .then(response => {
+//         for (let key in response.data.results) {
+//           fetchedMovies.push(response.data.results[key])
+//         }
 
-        if (fetchedMovies.length === 0) {
-          hasResult = false;
-          searchFinished = true;
-          totalResults = 0;
-          totalPages = 0;
-          currentPage = 1
-          dispatch(selectPageFail(fetchedMovies, currentPage));
-        } else {
-          currentPage = response.data.page;
-          dispatch(selectPageSuccess(fetchedMovies, currentPage));
-          hasResult = true;
-          totalResults = response.data.total_results;
-          totalPages = response.data.total_pages;
-        }
-      })
-      .catch(error => {
-        console.error(error);
-        dispatch(selectPageFail(fetchedMovies, currentPage));
-      })
-  };
-};
+//         if (fetchedMovies.length === 0) {
+//           hasResult = false;
+//           searchFinished = true;
+//           totalResults = 0;
+//           totalPages = 0;
+//           currentPage = 1
+//           dispatch(selectPageFail(fetchedMovies, currentPage));
+//         } else {
+//           currentPage = response.data.page;
+//           dispatch(selectPageSuccess(fetchedMovies, currentPage));
+//           hasResult = true;
+//           totalResults = response.data.total_results;
+//           totalPages = response.data.total_pages;
+//         }
+//       })
+//       .catch(error => {
+//         console.error(error);
+//         dispatch(selectPageFail(fetchedMovies, currentPage));
+//       })
+//   };
+// };
 
-export const selectPageStart = () => {
-  return {
-    type: 'SELECT_PAGE_START'
-  }
-}
+// export const selectPageStart = () => {
+//   return {
+//     type: 'SELECT_PAGE_START'
+//   }
+// }
 
-export const selectPageFail = () => {
-  return {
-    type: 'SELECT_PAGE_FAIL'
-  }
-}
+// export const selectPageFail = () => {
+//   return {
+//     type: 'SELECT_PAGE_FAIL'
+//   }
+// }
 
-export const selectPageSuccess = (fetchedMovies, currentPage) => {
-  window.scrollTo(0, 0);
-  return {
-    type: 'SELECT_PAGE_SUCCESS',
-    movies: fetchedMovies,
-    currentPage: currentPage
-  };
-}
+// export const selectPageSuccess = (fetchedMovies, currentPage) => {
+//   window.scrollTo(0, 0);
+//   return {
+//     type: 'SELECT_PAGE_SUCCESS',
+//     movies: fetchedMovies,
+//     currentPage: currentPage
+//   };
+// }

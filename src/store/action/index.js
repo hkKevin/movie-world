@@ -1,5 +1,5 @@
 export {
   searchMovies,
   selectMovie,
-  selectPage
+  // selectPage
 } from './movies';
