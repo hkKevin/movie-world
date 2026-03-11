@@ -27,6 +27,13 @@
 
 .movie > img {
   cursor: pointer;
+  border-radius: 14px;
+}
+
+.movie > img:hover,
+.movie > img:focus,
+.movie > img:focus-visible {
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1), 0px 20px 50px rgba(0, 0, 0, 0.2);
 }
 
 .tooltip {
@@ -62,6 +69,9 @@
   #intro-text {
     text-align: left;
     margin-inline: 5%;
+  }
+  .movie > img {
+    border-radius: 10px;
   }
 }
 

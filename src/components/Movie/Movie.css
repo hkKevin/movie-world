@@ -14,6 +14,7 @@
 
 .backdropSwiper .swiper-wrapper {
   width: 100%;
+  border-radius: 14px;
 }
 
 .backdropSwiper .swiper-button-prev {
@@ -84,6 +85,7 @@
 
 #left img {
   margin-inline: auto;
+  border-radius: 14px;
 }
 
 #movieTitle {
@@ -143,6 +145,7 @@ i#homepageIcon {
 
 .castProfilePic > img {
   width: 100px;
+  border-radius: 14px;
 }
 
 #videoContainer {
@@ -150,6 +153,10 @@ i#homepageIcon {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1em;
+}
+
+#videoContainer iframe {
+  border-radius: 14px;
 }
 
 #reviewInfo {
@@ -277,6 +284,22 @@ i#homepageIcon {
   #yearRuntimeRatingHomepage {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  #left img {
+    border-radius: 10px;
+  }
+
+  .castProfilePic > img {
+    border-radius: 10px;
+  }
+
+  #videoContainer iframe {
+    border-radius: 10px;
+  }
+
+  .backdropSwiper .swiper-wrapper {
+    border-radius: 10px;
   }
 }
 
